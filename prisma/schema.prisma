@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Experience {
+  id        Int                 @id @default(autoincrement())
+  order     Int
+  titleEn   String
+  titlePt   String
+  dateEn    String
+  datePt    String
+  company   String
+  location  String
+  bullets   ExperienceBullet[]
+  createdAt DateTime @default(now())
+}
+
+model ExperienceBullet {
+  id           Int        @id @default(autoincrement())
+  order        Int
+  textEn       String
+  textPt       String
+  experience   Experience @relation(fields: [experienceId], references: [id])
+  experienceId Int
+}
+
+model Project {
+  id       Int            @id @default(autoincrement())
+  order    Int
+  titleEn  String
+  titlePt  String
+  subEn    String
+  subPt    String
+  githubUrl String?
+  bullets  ProjectBullet[]
+  tags     ProjectTag[]
+}
+
+model ProjectBullet {
+  id        Int     @id @default(autoincrement())
+  order     Int
+  textEn    String
+  textPt    String
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId Int
+}
+
+model ProjectTag {
+  id        Int     @id @default(autoincrement())
+  label     String
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId Int
+}
+
+model SkillCategory {
+  id      Int     @id @default(autoincrement())
+  order   Int
+  keyEn   String
+  keyPt   String
+  skills  Skill[]
+}
+
+model Skill {
+  id         Int           @id @default(autoincrement())
+  label      String
+  isPrimary  Boolean       @default(false)
+  category   SkillCategory @relation(fields: [categoryId], references: [id])
+  categoryId Int
+}
+
+model Post {
+  id         Int      @id @default(autoincrement())
+  order      Int
+  titleEn    String
+  titlePt    String
+  excerptEn  String
+  excerptPt  String
+  contentEn  String
+  contentPt  String
+  tags       String
+  date       String
+  readTimeEn String
+  readTimePt String
+  postTags   PostTag[]
+}
+
+model PostTag {
+  id     Int    @id @default(autoincrement())
+  label  String
+  post   Post   @relation(fields: [postId], references: [id])
+  postId Int
+}
+
+model ContactInfo {
+  id      Int   @id @default(autoincrement())
+  key     String @unique
+  labelEn String
+  labelPt String
+  value   String
+  href    String?
+  order   Int
+}
+
+model Education {
+  id      Int   @id @default(autoincrement())
+  order   Int
+  badge   String
+  titleEn String
+  titlePt String
+  subEn   String
+  subPt   String
+}

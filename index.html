@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>luis@portfolio:~$</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   THEMES  — Timão Edition 🖤🤍
+═══════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg:           #080808;
+  --bg2:          #111111;
+  --bg3:          #1a1a1a;
+  --accent:       #ffffff;
+  --accent-dim:   #888888;
+  --accent-bright:#ffffff;
+  --amber:        #c8c8c8;
+  --cyan:         #aaaaaa;
+  --muted:        #333333;
+  --text:         #d4d4d4;
+  --text-dim:     #666666;
+  --border:       #222222;
+  --scanline:     rgba(255,255,255,0.012);
+  --vignette:     rgba(0,0,0,0.65);
+  --tag-bg:       #111111;
+  --meta-bg:      #111111;
+  --proj-bg:      #111111;
+  --contact-bg:   #111111;
+  --edu-bg:       #111111;
+  --statusbar-fg: #080808;
+  --titlebar-bg:  #1a1a1a;
+  --active-glow:  rgba(255,255,255,0.05);
+}
+[data-theme="light"] {
+  --bg:           #f5f5f5;
+  --bg2:          #ebebeb;
+  --bg3:          #e0e0e0;
+  --accent:       #111111;
+  --accent-dim:   #555555;
+  --accent-bright:#000000;
+  --amber:        #444444;
+  --cyan:         #333333;
+  --muted:        #bbbbbb;
+  --text:         #1a1a1a;
+  --text-dim:     #666666;
+  --border:       #cccccc;
+  --scanline:     rgba(0,0,0,0.018);
+  --vignette:     rgba(180,180,180,0.12);
+  --tag-bg:       #ffffff;
+  --meta-bg:      #ffffff;
+  --proj-bg:      #ffffff;
+  --contact-bg:   #ffffff;
+  --edu-bg:       #ffffff;
+  --statusbar-fg: #f5f5f5;
+  --titlebar-bg:  #e0e0e0;
+  --active-glow:  rgba(0,0,0,0.04);
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body {
+  background:var(--bg); color:var(--text);
+  font-family:'JetBrains Mono','IBM Plex Mono',monospace;
+  font-size:13px; line-height:1.7;
+  height:100%; overflow:hidden;
+  transition: background .3s, color .3s;
+}
+body::before {
+  content:''; position:fixed; inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scanline) 2px,var(--scanline) 4px);
+  pointer-events:none; z-index:1000;
+}
+body::after {
+  content:''; position:fixed; inset:0;
+  background:radial-gradient(ellipse at center,transparent 60%,var(--vignette) 100%);
+  pointer-events:none; z-index:999;
+}
+
+/* ─── LAYOUT ─── */
+.terminal {
+  display:grid;
+  grid-template-columns:220px 1fr;
+  grid-template-rows:36px 1fr 28px;
+  height:100vh;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+/* ─── TITLEBAR ─── */
+.titlebar {
+  grid-column:1/-1;
+  background:var(--titlebar-bg);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center;
+  padding:0 14px; gap:8px;
+  transition:background .3s,border-color .3s;
+}
+.titlebar .dot { width:10px;height:10px;border-radius:50%;flex-shrink:0; }
+.dot-r{background:#ff5f57}.dot-y{background:#febc2e}.dot-g{background:#28c840}
+.titlebar-label {
+  margin-left:10px; color:var(--text-dim);
+  font-size:11px; letter-spacing:.05em; flex:1;
+}
+.titlebar-label span { color:var(--accent); }
+.titlebar-controls { display:flex; align-items:center; gap:5px; margin-left:auto; }
+.ctrl-btn {
+  background:var(--bg2); border:1px solid var(--border);
+  color:var(--text-dim); font-family:inherit;
+  font-size:10px; padding:2px 9px; cursor:pointer;
+  letter-spacing:.06em; transition:all .15s; white-space:nowrap;
+}
+.ctrl-btn:hover { color:var(--accent); border-color:var(--accent-dim); background:var(--bg3); }
+.ctrl-btn.on { color:var(--accent); border-color:var(--accent); background:var(--active-glow); }
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  background:var(--bg2); border-right:1px solid var(--border);
+  padding:24px 0 20px; display:flex; flex-direction:column;
+  overflow:hidden; transition:background .3s,border-color .3s;
+}
+.sidebar-prompt {
+  padding:0 18px 18px; color:var(--accent-dim);
+  font-size:11px; border-bottom:1px solid var(--border); margin-bottom:8px;
+}
+.sidebar-prompt .host { color:var(--accent); font-weight:500; }
+.nav-item {
+  display:block; padding:6px 18px; color:var(--text-dim);
+  cursor:pointer; font-size:12px; transition:all .15s;
+  border-left:2px solid transparent; text-decoration:none; user-select:none;
+}
+.nav-item::before { content:'~/'; color:var(--muted); }
+.nav-item:hover { color:var(--text); background:var(--bg3); }
+.nav-item.active {
+  color:var(--accent); border-left-color:var(--accent);
+  background:var(--active-glow);
+}
+.nav-item.active::before { color:var(--accent-dim); }
+.sidebar-bottom {
+  margin-top:auto; padding:14px 18px 0;
+  border-top:1px solid var(--border); color:var(--text-dim);
+  font-size:10.5px; line-height:1.6;
+}
+.sidebar-bottom .mode {
+  display:inline-block; background:var(--accent); color:var(--bg);
+  padding:1px 8px; font-weight:700; font-size:10px;
+  letter-spacing:.08em; margin-bottom:6px;
+}
+
+/* ─── MAIN ─── */
+.main { overflow-y:auto; padding:32px 44px 40px; scroll-behavior:smooth; }
+.main::-webkit-scrollbar { width:4px; }
+.main::-webkit-scrollbar-thumb { background:var(--accent-dim); border-radius:2px; }
+.section { display:none; animation:fadein .22s ease; }
+.section.active { display:block; }
+@keyframes fadein { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+
+/* ─── COMMAND LINE ─── */
+.cmd { margin-bottom:22px; display:flex; flex-wrap:wrap; align-items:baseline; }
+.cmd-prompt { color:var(--accent); font-weight:500; white-space:nowrap; }
+.cmd-prompt .user   { color:var(--accent-bright); }
+.cmd-prompt .at     { color:var(--accent-dim); }
+.cmd-prompt .host   { color:var(--accent); }
+.cmd-prompt .path   { color:var(--cyan); }
+.cmd-prompt .sym    { color:var(--accent-dim); margin-right:8px; }
+.cmd-text           { color:var(--text); }
+.cmd-text .flag     { color:var(--amber); }
+
+/* ─── HOME ─── */
+.bio-title {
+  font-size:22px; font-weight:700; color:var(--accent-bright);
+  letter-spacing:-.02em; margin-bottom:4px;
+}
+.bio-role { color:var(--amber); font-size:12px; font-weight:400; margin-bottom:16px; letter-spacing:.06em; }
+.bio-desc { color:var(--text); font-weight:300; max-width:560px; line-height:1.85; margin-bottom:22px; font-size:12.5px; }
+.metadata {
+  background:var(--meta-bg); border:1px solid var(--border);
+  border-left:3px solid var(--accent-dim);
+  padding:14px 18px; margin-bottom:22px; max-width:480px; transition:background .3s;
+}
+.meta-row { display:grid; grid-template-columns:130px 1fr; margin-bottom:3px; font-size:11.5px; }
+.meta-key { color:var(--accent-dim); }
+.meta-key::after { content:'='; }
+.meta-val { color:var(--text); }
+.meta-val a { color:var(--cyan); text-decoration:none; }
+.meta-val a:hover { color:var(--accent); text-decoration:underline; }
+.cta-row { display:flex; gap:10px; flex-wrap:wrap; }
+.cta-btn {
+  display:inline-block; padding:7px 16px;
+  font-family:inherit; font-size:11.5px;
+  cursor:pointer; text-decoration:none; transition:all .15s; border:none;
+}
+.cta-primary { background:var(--accent); color:var(--bg); font-weight:700; }
+.cta-primary:hover { opacity:.88; }
+.cta-ghost { background:transparent; color:var(--text-dim); border:1px solid var(--border); }
+.cta-ghost:hover { color:var(--text); border-color:var(--accent-dim); }
+
+/* ─── EXPERIENCE ─── */
+.exp-entry { margin-bottom:34px; padding-bottom:34px; border-bottom:1px solid var(--border); }
+.exp-entry:last-child { border-bottom:none; padding-bottom:0; }
+.exp-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px; flex-wrap:wrap; gap:6px; }
+.exp-title  { color:var(--accent-bright); font-size:14px; font-weight:700; }
+.exp-date   { color:var(--amber); font-size:11px; white-space:nowrap; }
+.exp-company { color:var(--cyan); font-size:11.5px; margin-bottom:12px; }
+.exp-company .loc { color:var(--text-dim); }
+.exp-bullets { list-style:none; }
+.exp-bullets li {
+  padding-left:16px; position:relative; color:var(--text);
+  font-size:12px; font-weight:300; margin-bottom:5px; line-height:1.7;
+}
+.exp-bullets li::before { content:'▸'; position:absolute; left:0; color:var(--accent-dim); }
+
+/* ─── SKILLS ─── */
+.skills-grid { display:flex; flex-direction:column; gap:22px; }
+.skill-cat-title {
+  color:var(--text-dim); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+  margin-bottom:10px; display:flex; align-items:center; gap:8px;
+}
+.skill-cat-title::after { content:''; flex:1; height:1px; background:var(--border); }
+.skill-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.tag {
+  background:var(--tag-bg); border:1px solid var(--border);
+  color:var(--text); padding:3px 10px;
+  font-size:11px; font-family:inherit; transition:all .15s;
+}
+.tag:hover { border-color:var(--accent-dim); color:var(--accent); }
+.tag.primary { border-color:var(--accent-dim); color:var(--accent); font-weight:500; }
+
+/* ─── PROJECTS ─── */
+.proj-entry {
+  margin-bottom:28px; padding:20px 22px;
+  background:var(--proj-bg); border:1px solid var(--border);
+  border-left:3px solid var(--accent-dim);
+  transition:border-color .2s,background .3s;
+}
+.proj-entry:hover { border-left-color:var(--accent); }
+.proj-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px; flex-wrap:wrap; gap:8px; }
+.proj-title { color:var(--accent-bright); font-size:14px; font-weight:700; }
+.proj-sub   { color:var(--amber); font-size:11px; font-weight:300; margin-bottom:12px; }
+.proj-links a { color:var(--cyan); font-size:11px; text-decoration:none; }
+.proj-links a:hover { text-decoration:underline; }
+.proj-bullets { list-style:none; margin-bottom:14px; }
+.proj-bullets li {
+  padding-left:16px; position:relative; color:var(--text);
+  font-size:11.5px; font-weight:300; margin-bottom:5px; line-height:1.7;
+}
+.proj-bullets li::before { content:'▸'; position:absolute; left:0; color:var(--accent-dim); }
+.proj-tags { display:flex; flex-wrap:wrap; gap:5px; }
+.proj-tag {
+  background:var(--active-glow); border:1px solid var(--accent-dim);
+  color:var(--accent); padding:2px 8px;
+  font-size:10.5px; font-family:inherit;
+}
+
+/* ─── CONTACT ─── */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:28px; max-width:540px; }
+.contact-item {
+  background:var(--contact-bg); border:1px solid var(--border);
+  padding:12px 16px; transition:border-color .15s,background .3s;
+}
+.contact-item:hover { border-color:var(--accent-dim); }
+.contact-label { color:var(--text-dim); font-size:10px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:3px; }
+.contact-val { color:var(--cyan); font-size:12px; }
+.contact-val a { color:inherit; text-decoration:none; }
+.contact-val a:hover { color:var(--accent); }
+.edu-cert-grid { display:flex; flex-direction:column; gap:10px; max-width:540px; }
+.edu-item { background:var(--edu-bg); border:1px solid var(--border); padding:12px 16px; transition:background .3s; }
+.edu-badge {
+  display:inline-block; background:var(--accent-dim); color:var(--bg);
+  font-size:9px; font-weight:700; padding:2px 6px; letter-spacing:.08em; margin-bottom:5px;
+}
+.edu-badge.cert { background:var(--accent); }
+.edu-title { color:var(--text); font-size:12px; font-weight:500; }
+.edu-sub   { color:var(--text-dim); font-size:11px; font-weight:300; }
+
+/* ─── STATUS BAR ─── */
+.statusbar {
+  grid-column:1/-1; background:var(--accent);
+  display:flex; align-items:center; padding:0 16px; gap:16px;
+  font-size:10.5px; color:var(--statusbar-fg); font-weight:500; transition:background .3s;
+}
+.statusbar .sb-mode { background:var(--bg); color:var(--accent); padding:1px 8px; font-weight:700; }
+.statusbar .sb-right { margin-left:auto; opacity:.65; }
+
+/* ─── MISC ─── */
+.sep { color:var(--muted); margin:18px 0; font-size:11px; letter-spacing:-1px; }
+.sep::before { content:'────────────────────────────────────────────'; }
+.cursor {
+  display:inline-block; width:8px; height:13px;
+  background:var(--accent); animation:blink 1.1s step-end infinite;
+  vertical-align:text-bottom; margin-left:2px;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+code { color:var(--amber); }
+
+/* ─── POSTS ─── */
+.posts-filters { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:28px; }
+.filter-btn {
+  background:var(--bg2); border:1px solid var(--border);
+  color:var(--text-dim); font-family:inherit; font-size:10.5px;
+  padding:3px 12px; cursor:pointer; transition:all .15s; letter-spacing:.04em;
+}
+.filter-btn:hover { color:var(--text); border-color:var(--accent-dim); }
+.filter-btn.active { color:var(--accent); border-color:var(--accent); background:var(--active-glow); font-weight:500; }
+
+.posts-grid { display:flex; flex-direction:column; gap:14px; }
+
+.post-card {
+  background:var(--proj-bg); border:1px solid var(--border);
+  padding:18px 20px; cursor:pointer;
+  transition:border-color .18s, background .3s;
+  position:relative;
+}
+.post-card:hover { border-color:var(--accent-dim); }
+.post-card[data-open="true"] { border-left:3px solid var(--accent); }
+
+.post-card-header { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; flex-wrap:wrap; }
+.post-card-left { flex:1; }
+.post-title { color:var(--accent-bright); font-size:13px; font-weight:700; margin-bottom:5px; line-height:1.4; }
+.post-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.post-date { color:var(--text-dim); font-size:10.5px; }
+.post-tag {
+  background:var(--active-glow); border:1px solid var(--accent-dim);
+  color:var(--accent); padding:1px 7px; font-size:10px; font-family:inherit;
+}
+.post-read { color:var(--text-dim); font-size:10.5px; white-space:nowrap; }
+.post-toggle { color:var(--accent-dim); font-size:11px; flex-shrink:0; transition:transform .2s; }
+.post-card[data-open="true"] .post-toggle { transform:rotate(90deg); }
+
+.post-excerpt { color:var(--text-dim); font-size:12px; font-weight:300; margin-top:8px; line-height:1.65; }
+
+.post-body {
+  display:none; margin-top:16px;
+  padding-top:16px; border-top:1px solid var(--border);
+  color:var(--text); font-size:12px; font-weight:300; line-height:1.85;
+}
+.post-card[data-open="true"] .post-body { display:block; }
+.post-body h4 { color:var(--accent); font-size:12px; font-weight:700; margin:16px 0 6px; letter-spacing:.04em; }
+.post-body h4:first-child { margin-top:0; }
+.post-body p { margin-bottom:12px; }
+.post-body p:last-child { margin-bottom:0; }
+.post-body code {
+  background:var(--bg3); border:1px solid var(--border);
+  padding:1px 6px; font-family:inherit; font-size:11px; color:var(--amber);
+}
+.post-body pre {
+  background:var(--bg3); border:1px solid var(--border);
+  padding:14px 16px; margin:12px 0; overflow-x:auto;
+  font-family:inherit; font-size:11px; line-height:1.65; color:var(--text);
+}
+.post-body pre .kw  { color:var(--accent); font-weight:600; }
+.post-body pre .cm  { color:var(--text-dim); font-style:italic; }
+.post-body pre .str { color:var(--amber); }
+.post-body ul { list-style:none; margin:8px 0 12px; }
+.post-body ul li { padding-left:14px; position:relative; margin-bottom:4px; }
+.post-body ul li::before { content:'▸'; position:absolute; left:0; color:var(--accent-dim); }
+.post-body .callout {
+  border-left:2px solid var(--accent-dim); padding:10px 14px;
+  background:var(--active-glow); margin:12px 0;
+  font-size:11.5px; color:var(--text-dim);
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:700px){
+  html,body{overflow:auto}
+  .terminal{grid-template-columns:1fr;grid-template-rows:36px auto 1fr 28px;height:auto;min-height:100vh}
+  .sidebar{border-right:none;border-bottom:1px solid var(--border);padding:8px 0;flex-direction:row;flex-wrap:wrap}
+  .sidebar-prompt,.sidebar-bottom{display:none}
+  .nav-item{padding:6px 10px;font-size:11px;border-left:none;border-bottom:2px solid transparent}
+  .nav-item.active{border-bottom-color:var(--accent);border-left:none}
+  .main{padding:20px 18px 32px;overflow:visible}
+  .contact-grid{grid-template-columns:1fr}
+  .titlebar-label{display:none}
+}
+</style>
+</head>
+<body>
+<div class="terminal">
+
+  <!-- TITLEBAR -->
+  <div class="titlebar">
+    <span class="dot dot-r"></span>
+    <span class="dot dot-y"></span>
+    <span class="dot dot-g"></span>
+    <span class="titlebar-label"><span>luis</span>@portfolio:~$ — zsh — 120×38</span>
+    <div class="titlebar-controls">
+      <button class="ctrl-btn on" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="ctrl-btn"    id="btn-pt" onclick="setLang('pt')">PT</button>
+      <button class="ctrl-btn"    id="btn-theme" onclick="toggleTheme()">◐ THEME</button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-prompt">
+      <div><span class="host">luis</span><span style="color:var(--accent-dim)">@</span><span style="color:var(--cyan)">portfolio</span></div>
+      <div style="color:var(--text-dim);font-size:10px" data-i18n="role">Backend Engineer</div>
+    </div>
+    <nav id="nav">
+      <a class="nav-item active" data-section="home"       href="#" data-i18n-nav="nav_home">home</a>
+      <a class="nav-item"        data-section="experience" href="#" data-i18n-nav="nav_exp">experience</a>
+      <a class="nav-item"        data-section="skills"     href="#" data-i18n-nav="nav_skills">skills</a>
+      <a class="nav-item"        data-section="projects"   href="#" data-i18n-nav="nav_projects">projects</a>
+      <a class="nav-item"        data-section="contact"    href="#" data-i18n-nav="nav_contact">contact</a>
+      <a class="nav-item"        data-section="posts"      href="#" data-i18n-nav="nav_posts">posts</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="mode">NORMAL</div>
+      <div>Java · Spring Boot</div>
+      <div>DDD · Hexagonal Arch</div>
+      <div>Kafka · RabbitMQ</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- HOME -->
+    <section class="section active" id="home">
+      <div class="cmd">
+        <span class="cmd-prompt"><span class="user">luis</span><span class="at">@</span><span class="host">portfolio</span>:<span class="path">~</span><span class="sym">$&nbsp;</span></span>
+        <span class="cmd-text">cat about.md</span>
+      </div>
+      <div style="margin-bottom:26px">
+        <pre style="color:var(--accent-dim);font-size:10px;line-height:1.25;margin-bottom:14px;overflow:hidden"> ██╗     ██╗   ██╗██╗███████╗
+ ██║     ██║   ██║██║██╔════╝
+ ██║     ██║   ██║██║███████╗
+ ██║     ██║   ██║██║╚════██║
+ ███████╗╚██████╔╝██║███████║
+ ╚══════╝ ╚═════╝ ╚═╝╚══════╝</pre>
+        <div class="bio-title">Luis Henrique de Barros</div>
+        <div class="bio-role" data-i18n="bio_role">Backend Software Engineer · Java &amp; Distributed Systems</div>
+        <div class="bio-desc" data-i18n="bio_desc">Building production-grade distributed systems with Java 21 &amp; Spring Boot 3. Passionate about hexagonal architecture, domain-driven design, and event-driven patterns with Kafka and RabbitMQ. I bridge domain modelling and infrastructure — from DDD aggregate design to critical Oracle PL/SQL query optimization. Currently open to backend &amp; platform engineering roles at product companies.</div>
+      </div>
+      <div class="metadata">
+        <div class="meta-row"><span class="meta-key" data-i18n="meta_loc">location</span><span class="meta-val">Sertãozinho, SP, Brasil</span></div>
+        <div class="meta-row"><span class="meta-key" data-i18n="meta_exp">experience</span><span class="meta-val" data-i18n="meta_exp_val">2+ years</span></div>
+        <div class="meta-row"><span class="meta-key" data-i18n="meta_company">company</span><span class="meta-val">Nova Smar S/A</span></div>
+        <div class="meta-row"><span class="meta-key">stack</span><span class="meta-val">Java 21 · Spring Boot 3 · Kafka · PostgreSQL</span></div>
+        <div class="meta-row"><span class="meta-key">focus</span><span class="meta-val">DDD · Hexagonal Architecture · E2EE</span></div>
+        <div class="meta-row"><span class="meta-key">github</span><span class="meta-val"><a href="https://github.com/LuisHBarros" target="_blank">github.com/LuisHBarros</a></span></div>
+        <div class="meta-row"><span class="meta-key">linkedin</span><span class="meta-val"><a href="https://linkedin.com/in/luis-henriquede-barros-207929226" target="_blank">luis-henriquede-barros</a></span></div>
+        <div class="meta-row"><span class="meta-key">website</span><span class="meta-val"><a href="https://luisbarros.dev" target="_blank">luisbarros.dev</a></span></div>
+      </div>
+      <div class="cta-row">
+        <a class="cta-btn cta-primary" href="/cdn-cgi/l/email-protection#b6dac3dfc5dec4d4c4f6d1dbd7dfda98d5d9db" data-i18n="cta_contact">✉ get in touch</a>
+        <a class="cta-btn cta-ghost" href="https://github.com/LuisHBarros" target="_blank">⇗ github</a>
+        <a class="cta-btn cta-ghost" href="https://linkedin.com/in/luis-henriquede-barros-207929226" target="_blank">⇗ linkedin</a>
+      </div>
+      <div class="sep"></div>
+      <span style="color:var(--text-dim);font-size:11px"><span style="color:var(--accent-dim)">$</span> _<span class="cursor"></span></span>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
+      <div class="cmd">
+        <span class="cmd-prompt"><span class="user">luis</span><span class="at">@</span><span class="host">portfolio</span>:<span class="path">~/experience</span><span class="sym">$&nbsp;</span></span>
+        <span class="cmd-text">cat work_history.log</span>
+      </div>
+      <div class="exp-entry">
+        <div class="exp-header">
+          <div class="exp-title" data-i18n="j1_title">Development Analyst</div>
+          <div class="exp-date"  data-i18n="j1_date">May 2025 – Present</div>
+        </div>
+        <div class="exp-company">Nova Smar S/A · <span class="loc">Sertãozinho, SP</span></div>
+        <ul class="exp-bullets">
+          <li data-i18n="j1_b1">Led greenfield projects in Java/Spring Boot and Python/Django, translating business requirements into domain-oriented solutions with strong UX focus.</li>
+          <li data-i18n="j1_b2">Performed critical PL/SQL performance optimizations on Oracle Database, eliminating N+1 query patterns in high-volume processing routines.</li>
+          <li data-i18n="j1_b3">Mentored junior developers and interns on Clean Architecture and SOLID principles, accelerating team onboarding and raising code quality standards.</li>
+          <li data-i18n="j1_b4">Integrated AI-assisted tooling into the development workflow, boosting productivity in automation and code generation tasks.</li>
+        </ul>
+      </div>
+      <div class="exp-entry">
+        <div class="exp-header">
+          <div class="exp-title" data-i18n="j2_title">Programming Assistant</div>
+          <div class="exp-date"  data-i18n="j2_date">Nov 2024 – May 2025</div>
+        </div>
+        <div class="exp-company">Nova Smar S/A · <span class="loc">Sertãozinho, SP</span></div>
+        <ul class="exp-bullets">
+          <li data-i18n="j2_b1">Refactored legacy PL/SQL procedures in Oracle Database — eliminated SQL injection vectors via bind variables and replaced magic numbers with named constants.</li>
+          <li data-i18n="j2_b2">Evolved PHP 5 legacy systems applying SOLID principles, improving maintainability and extensibility of critical business logic modules.</li>
+          <li data-i18n="j2_b3">Collaborated in technical discovery sessions with business stakeholders to adapt legacy systems to web-based environments.</li>
+          <li data-i18n="j2_b4">Promoted to Development Analyst within 6 months — one of the fastest advancement trajectories in the team.</li>
+        </ul>
+      </div>
+      <div class="exp-entry">
+        <div class="exp-header">
+          <div class="exp-title" data-i18n="j3_title">IT Assistant</div>
+          <div class="exp-date"  data-i18n="j3_date">Jan 2024 – Nov 2024</div>
+        </div>
+        <div class="exp-company">Fundição Moreno · <span class="loc">Sertãozinho, SP</span></div>
+        <ul class="exp-bullets">
+          <li data-i18n="j3_b1">Built internal APIs and business systems with Spring Boot 3 and Java 21, participating in architecture design and domain rule implementation.</li>
+          <li data-i18n="j3_b2">Optimized Oracle Database procedures and queries via PL/SQL, creating high-performance data processing routines for industrial workloads.</li>
+          <li data-i18n="j3_b3">Delivered full-stack features bridging ERP integration with web interfaces, gaining hands-on experience with Protheus TOTVS ecosystems.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="cmd">
+        <span class="cmd-prompt"><span class="user">luis</span><span class="at">@</span><span class="host">portfolio</span>:<span class="path">~/skills</span><span class="sym">$&nbsp;</span></span>
+        <span class="cmd-text">ls <span class="flag">-la</span> skills/</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-cat"><div class="skill-cat-title" data-i18n="sk_lang">languages &amp; backend</div><div class="skill-tags"><span class="tag primary">Java 21</span><span class="tag primary">Spring Boot 3</span><span class="tag">Spring Security</span><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Django</span><span class="tag">PHP</span><span class="tag">REST APIs</span><span class="tag">WebSocket</span></div></div>
+        <div class="skill-cat"><div class="skill-cat-title" data-i18n="sk_arch">architecture &amp; design</div><div class="skill-tags"><span class="tag primary">Hexagonal Architecture</span><span class="tag primary">Domain-Driven Design</span><span class="tag">Microservices</span><span class="tag">Modular Monolith</span><span class="tag">Event-Driven Design</span><span class="tag">Outbox Pattern</span><span class="tag">SOLID</span><span class="tag">Clean Architecture</span></div></div>
+        <div class="skill-cat"><div class="skill-cat-title" data-i18n="sk_msg">messaging &amp; async</div><div class="skill-tags"><span class="tag primary">Apache Kafka</span><span class="tag primary">RabbitMQ</span><span class="tag">Domain Events</span><span class="tag">Event Sourcing</span></div></div>
+        <div class="skill-cat"><div class="skill-cat-title" data-i18n="sk_db">databases &amp; storage</div><div class="skill-tags"><span class="tag primary">PostgreSQL</span><span class="tag primary">Oracle Database</span><span class="tag">PL/SQL</span><span class="tag">Redis</span><span class="tag">JPA / Hibernate</span><span class="tag">MinIO (S3)</span></div></div>
+        <div class="skill-cat"><div class="skill-cat-title" data-i18n="sk_sec">security &amp; auth</div><div class="skill-tags"><span class="tag">JWT (RS256 / HS256)</span><span class="tag">OAuth2 (Google)</span><span class="tag">AES-256-GCM</span><span class="tag">ECDH / HKDF-SHA256</span><span class="tag">Argon2id</span><span class="tag">Magic Link Auth</span><span class="tag">E2EE</span></div></div>
+        <div class="skill-cat"><div class="skill-cat-title" data-i18n="sk_obs">observability &amp; testing</div><div class="skill-tags"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Zipkin</span><span class="tag">Micrometer</span><span class="tag">JUnit 5</span><span class="tag">Testcontainers</span><span class="tag">Mockito</span><span class="tag">WireMock</span><span class="tag">AssertJ</span></div></div>
+        <div class="skill-cat"><div class="skill-cat-title" data-i18n="sk_infra">infra &amp; devops</div><div class="skill-tags"><span class="tag">Docker</span><span class="tag">Docker Compose</span><span class="tag">GitHub Actions</span><span class="tag">CI/CD</span><span class="tag">Git</span><span class="tag">Linux</span></div></div>
+        <div class="skill-cat"><div class="skill-cat-title" data-i18n="sk_int">integrations</div><div class="skill-tags"><span class="tag">Stripe (Card + Pix)</span><span class="tag">SendGrid</span><span class="tag">Notion API</span><span class="tag">Google OAuth2</span><span class="tag">Nuvem Fiscal (NFS-e)</span></div></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="cmd">
+        <span class="cmd-prompt"><span class="user">luis</span><span class="at">@</span><span class="host">portfolio</span>:<span class="path">~/projects</span><span class="sym">$&nbsp;</span></span>
+        <span class="cmd-text">git log <span class="flag">--oneline --all</span></span>
+      </div>
+      <div class="proj-entry">
+        <div class="proj-header">
+          <div><div class="proj-title" data-i18n="p1_title">Discord-Like — Real-Time Chat Platform</div><div class="proj-sub" data-i18n="p1_sub">Modular Monolith · DDD · E2EE · WebSocket · Kafka</div></div>
+          <div class="proj-links"><a href="https://github.com/LuisHBarros" target="_blank">⇗ github</a></div>
+        </div>
+        <ul class="proj-bullets">
+          <li data-i18n="p1_b1">Modular monolith with 3 fully decoupled bounded contexts (Identity, Collaboration, Presence) — inter-context communication exclusively via domain events published to Kafka, with zero class imports between contexts.</li>
+          <li data-i18n="p1_b2">End-to-end encryption (E2EE) at the message level: ECDH for key exchange, HKDF-SHA256 for key derivation, AES-256-GCM with a random 12-byte IV per message.</li>
+          <li data-i18n="p1_b3">WebSocket sessions with userId extracted exclusively from the authenticated JWT — never accepted as client input. Redis handles presence, token blacklisting, and caching.</li>
+          <li data-i18n="p1_b4">145 tests running in CI/CD with GitHub Actions, requiring no additional infrastructure. Integration tests with Testcontainers tagged <code>@Tag("integration")</code> for isolated execution.</li>
+        </ul>
+        <div class="proj-tags"><span class="proj-tag">Java 21</span><span class="proj-tag">Spring Boot 3</span><span class="proj-tag">Kafka</span><span class="proj-tag">WebSocket</span><span class="proj-tag">Redis</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">E2EE</span><span class="proj-tag">Testcontainers</span><span class="proj-tag">GitHub Actions</span></div>
+      </div>
+      <div class="proj-entry">
+        <div class="proj-header">
+          <div><div class="proj-title" data-i18n="p2_title">Assine — Newsletter Subscription Platform</div><div class="proj-sub" data-i18n="p2_sub">Microservices · RabbitMQ · Stripe · Outbox Pattern</div></div>
+          <div class="proj-links"><a href="https://github.com/LuisHBarros" target="_blank">⇗ github</a></div>
+        </div>
+        <ul class="proj-bullets">
+          <li data-i18n="p2_b1">8-service microservices architecture (gateway, auth, billing, fiscal, notifications, content, subscriptions, access) — each service owns its own database, enforcing strict bounded context isolation.</li>
+          <li data-i18n="p2_b2">Outbox Pattern in the billing service guarantees atomicity between persistence and event publication to RabbitMQ. JWT RS256 with local JWKS validation at the API gateway.</li>
+          <li data-i18n="p2_b3">Full Stripe integration (credit card + Pix), automatic NFS-e emission via Nuvem Fiscal, newsletter delivery via Notion API + SendGrid, and passwordless auth (magic link + Google OAuth2).</li>
+          <li data-i18n="p2_b4">Observability stack: Prometheus metrics, Grafana dashboards, and distributed tracing with Zipkin. Tests with JUnit 5, Testcontainers, and WireMock for third-party service mocking.</li>
+        </ul>
+        <div class="proj-tags"><span class="proj-tag">Java 21</span><span class="proj-tag">Spring Boot 3</span><span class="proj-tag">RabbitMQ</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">Stripe</span><span class="proj-tag">Outbox Pattern</span><span class="proj-tag">Prometheus</span><span class="proj-tag">Grafana</span><span class="proj-tag">Docker</span></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="cmd">
+        <span class="cmd-prompt"><span class="user">luis</span><span class="at">@</span><span class="host">portfolio</span>:<span class="path">~/contact</span><span class="sym">$&nbsp;</span></span>
+        <span class="cmd-text">cat contact.json</span>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-item"><div class="contact-label">✉ email</div><div class="contact-val"><a href="/cdn-cgi/l/email-protection#9bf7eef2e8f3e9f9e9dbfcf6faf2f7b5f8f4f6"><span class="__cf_email__" data-cfemail="4d2138243e253f2f3f0d2a202c2421632e2220">[email&#160;protected]</span></a></div></div>
+        <div class="contact-item"><div class="contact-label" data-i18n="c_phone">☏ phone</div><div class="contact-val"><a href="tel:+5516993991421">+55 16 99399-1421</a></div></div>
+        <div class="contact-item"><div class="contact-label">⇗ linkedin</div><div class="contact-val"><a href="https://linkedin.com/in/luis-henriquede-barros-207929226" target="_blank">luis-henriquede-barros</a></div></div>
+        <div class="contact-item"><div class="contact-label">◉ github</div><div class="contact-val"><a href="https://github.com/LuisHBarros" target="_blank">LuisHBarros</a></div></div>
+        <div class="contact-item"><div class="contact-label">◎ website</div><div class="contact-val"><a href="https://luisbarros.dev" target="_blank">luisbarros.dev</a></div></div>
+        <div class="contact-item"><div class="contact-label" data-i18n="c_loc_label">◎ location</div><div class="contact-val" data-i18n="c_loc_val">Sertãozinho, SP, Brazil</div></div>
+      </div>
+      <div class="sep"></div>
+      <div class="edu-cert-grid">
+        <div class="edu-item"><span class="edu-badge">EDU</span><div class="edu-title" data-i18n="edu1_title">B.Sc. in Computer Engineering</div><div class="edu-sub">Descomplica Faculdade Digital · 2022 – 2025</div></div>
+        <div class="edu-item"><span class="edu-badge cert">CERT</span><div class="edu-title">Google Cloud Computing Foundations</div><div class="edu-sub" data-i18n="cert1_sub">Cloud Computing Fundamentals · Networking — Google</div></div>
+        <div class="edu-item"><span class="edu-badge cert">CERT</span><div class="edu-title" data-i18n="cert2_title">Fundamentos da Cultura DevOps</div><div class="edu-sub" data-i18n="cert2_sub">DevOps culture and practices certification</div></div>
+        <div class="edu-item"><span class="edu-badge">LANG</span><div class="edu-title" data-i18n="lang_title">Languages</div><div class="edu-sub" data-i18n="lang_sub">Portuguese (Native) · English (Advanced technical reading)</div></div>
+      </div>
+      <div class="sep"></div>
+      <a class="cta-btn cta-primary" href="/cdn-cgi/l/email-protection#b6dac3dfc5dec4d4c4f6d1dbd7dfda98d5d9db" data-i18n="cta_reach">↓ reach out</a>
+    </section>
+
+    <!-- POSTS -->
+    <section class="section" id="posts">
+      <div class="cmd">
+        <span class="cmd-prompt"><span class="user">luis</span><span class="at">@</span><span class="host">portfolio</span>:<span class="path">~/posts</span><span class="sym">$&nbsp;</span></span>
+        <span class="cmd-text">ls <span class="flag">-lt</span> posts/ <span class="flag">| grep</span> .md</span>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="posts-filters" id="posts-filters">
+        <button class="filter-btn active" data-filter="all"    data-i18n="pf_all">all</button>
+        <button class="filter-btn"        data-filter="java"   >Java</button>
+        <button class="filter-btn"        data-filter="sql"    >SQL</button>
+        <button class="filter-btn"        data-filter="arch"   data-i18n="pf_arch">Architecture</button>
+        <button class="filter-btn"        data-filter="career" data-i18n="pf_career">Career</button>
+      </div>
+
+      <div class="posts-grid" id="posts-grid">
+
+        <!-- POST 1 -->
+        <article class="post-card" data-tags="java arch" data-open="false">
+          <div class="post-card-header">
+            <div class="post-card-left">
+              <div class="post-title" data-i18n="post1_title">Why I chose Hexagonal Architecture for my portfolio projects</div>
+              <div class="post-meta">
+                <span class="post-date">Mar 2025</span>
+                <span class="post-tag" data-i18n="pf_arch">Architecture</span>
+                <span class="post-tag">Java</span>
+                <span class="post-read" data-i18n="read_6">6 min read</span>
+              </div>
+            </div>
+            <span class="post-toggle">▶</span>
+          </div>
+          <div class="post-excerpt" data-i18n="post1_excerpt">Ports &amp; Adapters isn't just a pattern — it's a discipline. Here's how adopting it changed the way I think about every layer of an application.</div>
+          <div class="post-body">
+            <p data-i18n="post1_p1">When I started the Discord-Like project I could have wired Spring controllers directly to JPA repositories and called it a day. Most tutorials do exactly that. But I'd seen enough legacy codebases at work — tightly coupled PHP and PL/SQL monstrosities — to know where that road ends.</p>
+            <h4>The core idea</h4>
+            <p data-i18n="post1_p2">Hexagonal Architecture (Ports &amp; Adapters) says: your domain model should have zero knowledge of Spring, JPA, Kafka, or HTTP. It talks only to interfaces — Ports — which the infrastructure implements as Adapters. Swap Kafka for RabbitMQ? Touch one adapter. Switch from PostgreSQL to MongoDB? One adapter. Your domain tests don't even need a running database.</p>
+            <pre><span class="cm">// Domain — pure Java, zero framework annotations</span>
+<span class="kw">public interface</span> MessageRepository {          <span class="cm">// OUTPUT PORT</span>
+    <span class="kw">void</span> save(Message message);
+    Optional&lt;Message&gt; findById(MessageId id);
+}
+
+<span class="cm">// Infrastructure — the Spring/JPA adapter</span>
+<span class="kw">@Repository</span>
+<span class="kw">public class</span> JpaMessageRepository <span class="kw">implements</span> MessageRepository {
+    <span class="kw">private final</span> MessageJpaRepository jpa;
+    <span class="cm">// ...JPA implementation here</span>
+}</pre>
+            <h4 data-i18n="post1_h2">What I gained in practice</h4>
+            <ul>
+              <li data-i18n="post1_li1">145 tests run with zero Docker — domain logic tested with pure mocks</li>
+              <li data-i18n="post1_li2">Kafka, Redis and PostgreSQL swappable without touching domain code</li>
+              <li data-i18n="post1_li3">Onboarding new contributors is much faster — the domain reads like a business spec</li>
+              <li data-i18n="post1_li4">Forced me to think in use cases first, not tables or endpoints</li>
+            </ul>
+            <div class="callout" data-i18n="post1_callout">The biggest benefit isn't technical — it's cognitive. When the infrastructure is invisible, you think in domain terms and write better software.</div>
+          </div>
+        </article>
+
+        <!-- POST 2 -->
+        <article class="post-card" data-tags="sql" data-open="false">
+          <div class="post-card-header">
+            <div class="post-card-left">
+              <div class="post-title" data-i18n="post2_title">Hunting N+1 queries in Oracle PL/SQL stored procedures</div>
+              <div class="post-meta">
+                <span class="post-date">Feb 2025</span>
+                <span class="post-tag">SQL</span>
+                <span class="post-read" data-i18n="read_5">5 min read</span>
+              </div>
+            </div>
+            <span class="post-toggle">▶</span>
+          </div>
+          <div class="post-excerpt" data-i18n="post2_excerpt">A SELECT inside a cursor loop is a silent performance killer. Here's how I diagnosed and fixed recurring N+1 patterns in high-volume industrial PL/SQL routines.</div>
+          <div class="post-body">
+            <p data-i18n="post2_p1">At Nova Smar, I inherited stored procedures that had been accumulating business logic for years. One of them processed thousands of production records per run — and was inexplicably slow. Profiling revealed the culprit: a SELECT inside a cursor loop.</p>
+            <h4 data-i18n="post2_h1">The classic trap</h4>
+            <pre><span class="cm">-- ❌ N+1: one extra SELECT per row in the cursor</span>
+<span class="kw">FOR</span> rec <span class="kw">IN</span> (SELECT id, product_code FROM movimento) <span class="kw">LOOP</span>
+    SELECT unit_cost <span class="kw">INTO</span> v_cost
+    FROM   products
+    WHERE  code = rec.product_code;   <span class="cm">-- fired N times!</span>
+    <span class="cm">-- ... process rec</span>
+<span class="kw">END LOOP</span>;</pre>
+            <h4 data-i18n="post2_h2">The fix: push the join up</h4>
+            <pre><span class="cm">-- ✅ Single pass with a join in the driving query</span>
+<span class="kw">FOR</span> rec <span class="kw">IN</span> (
+    SELECT m.id, m.product_code, p.unit_cost
+    FROM   movimento  m
+    JOIN   products   p <span class="kw">ON</span> p.code = m.product_code
+) <span class="kw">LOOP</span>
+    <span class="cm">-- rec.unit_cost is already here, no extra round-trip</span>
+<span class="kw">END LOOP</span>;</pre>
+            <p data-i18n="post2_p2">When avoiding the join isn't possible — e.g. conditional lookups — a bulk <code>COLLECT INTO</code> with a <code>FORALL</code> DML, or a pre-populated associative array, can eliminate the round-trips entirely.</p>
+            <div class="callout" data-i18n="post2_callout">Rule of thumb: if you reach for a SELECT inside a loop, pause and ask whether a single set-based query — or at worst a bulk collect — can replace it.</div>
+          </div>
+        </article>
+
+        <!-- POST 3 -->
+        <article class="post-card" data-tags="java arch" data-open="false">
+          <div class="post-card-header">
+            <div class="post-card-left">
+              <div class="post-title" data-i18n="post3_title">The Outbox Pattern: how to not lose events when your DB commits</div>
+              <div class="post-meta">
+                <span class="post-date">Jan 2025</span>
+                <span class="post-tag" data-i18n="pf_arch">Architecture</span>
+                <span class="post-tag">Java</span>
+                <span class="post-read" data-i18n="read_7">7 min read</span>
+              </div>
+            </div>
+            <span class="post-toggle">▶</span>
+          </div>
+          <div class="post-excerpt" data-i18n="post3_excerpt">Publishing a domain event after a DB commit looks simple. It isn't. The Outbox Pattern is the canonical solution — and I implemented it in the Assine billing service.</div>
+          <div class="post-body">
+            <p data-i18n="post3_p1">Imagine you charge a subscription: the database commits the payment record, then you publish a <code>PaymentConfirmed</code> event to RabbitMQ. What happens if the app crashes between the two? The DB has the money, but the email service never fires. The customer never receives their receipt. That's a dual-write problem.</p>
+            <h4>Outbox Pattern</h4>
+            <p data-i18n="post3_p2">The solution: write the event to an <code>outbox</code> table in the same local DB transaction as the payment record. A separate relay process polls the outbox and publishes to the broker — marking rows as published only on success.</p>
+            <pre><span class="cm">-- Same transaction: payment + outbox row</span>
+<span class="kw">BEGIN</span>;
+  INSERT <span class="kw">INTO</span> payments(id, amount, status) <span class="kw">VALUES</span>(...);
+  INSERT <span class="kw">INTO</span> outbox(id, aggregate_type, payload, published)
+         <span class="kw">VALUES</span>(gen_random_uuid(), <span class="str">'PaymentConfirmed'</span>, :json, <span class="kw">false</span>);
+<span class="kw">COMMIT</span>;</pre>
+            <h4 data-i18n="post3_h2">The relay</h4>
+            <p data-i18n="post3_p3">In Assine I implemented the relay as a scheduled Spring component. It reads unpublished rows, publishes each to RabbitMQ, and only then marks them published. If publishing fails, the row stays unpublished and will be retried on the next tick.</p>
+            <div class="callout" data-i18n="post3_callout">The trade-off: at-least-once delivery. Your consumers must be idempotent. But that's a much easier problem than losing events entirely.</div>
+          </div>
+        </article>
+
+        <!-- POST 4 -->
+        <article class="post-card" data-tags="career" data-open="false">
+          <div class="post-card-header">
+            <div class="post-card-left">
+              <div class="post-title" data-i18n="post4_title">From Junior to Analyst in 6 months: what actually moved the needle</div>
+              <div class="post-meta">
+                <span class="post-date">Dec 2024</span>
+                <span class="post-tag" data-i18n="pf_career">Career</span>
+                <span class="post-read" data-i18n="read_4">4 min read</span>
+              </div>
+            </div>
+            <span class="post-toggle">▶</span>
+          </div>
+          <div class="post-excerpt" data-i18n="post4_excerpt">It wasn't about coding more hours. It was about making my work visible, understanding the business, and solving problems nobody asked me to solve.</div>
+          <div class="post-body">
+            <p data-i18n="post4_p1">When I joined Nova Smar as a Programming Assistant in November 2024, I set a private goal: make Analyst before the end of the first year. Six months later I was promoted. Here's what I think actually made the difference.</p>
+            <h4 data-i18n="post4_h1">1. Understand why before how</h4>
+            <p data-i18n="post4_p2">Every bug I fixed, I asked: "why did this exist?" Most legacy PHP issues weren't bugs — they were missing abstractions. Fixing the symptom and documenting the cause made me someone people brought problems to, not just tasks.</p>
+            <h4 data-i18n="post4_h2">2. Make complexity visible</h4>
+            <p data-i18n="post4_p3">I started writing internal notes after every significant refactor — what was wrong, what changed, what risks remain. Managers rarely see the invisible work. Making it legible is a skill in itself.</p>
+            <h4 data-i18n="post4_h3">3. Mentor before you're asked</h4>
+            <p data-i18n="post4_p4">When two interns joined, I volunteered to pair with them on their first tasks. Teaching forces you to articulate things you think you know. It also signals readiness for the next level in a way no single PR ever can.</p>
+            <div class="callout" data-i18n="post4_callout">Promotions rarely come from writing better code. They come from expanding the surface of your impact beyond your own keyboard.</div>
+          </div>
+        </article>
+
+        <!-- POST 5 -->
+        <article class="post-card" data-tags="java" data-open="false">
+          <div class="post-card-header">
+            <div class="post-card-left">
+              <div class="post-title" data-i18n="post5_title">E2EE in Java: ECDH + HKDF + AES-256-GCM from scratch</div>
+              <div class="post-meta">
+                <span class="post-date">Nov 2024</span>
+                <span class="post-tag">Java</span>
+                <span class="post-read" data-i18n="read_8">8 min read</span>
+              </div>
+            </div>
+            <span class="post-toggle">▶</span>
+          </div>
+          <div class="post-excerpt" data-i18n="post5_excerpt">End-to-end encryption sounds intimidating. The math is hard; the Java API is manageable. Here's the full key-exchange and encryption pipeline I built for the Discord-Like project.</div>
+          <div class="post-body">
+            <h4 data-i18n="post5_h1">The protocol in three steps</h4>
+            <ul>
+              <li data-i18n="post5_li1"><strong>ECDH (P-256):</strong> each client generates a key pair, exchanges public keys, derives a shared secret — without ever transmitting the secret itself</li>
+              <li data-i18n="post5_li2"><strong>HKDF-SHA256:</strong> stretches and contextualises the raw shared secret into a proper 256-bit encryption key</li>
+              <li data-i18n="post5_li3"><strong>AES-256-GCM:</strong> encrypts each message with a random 12-byte IV — GCM mode gives both confidentiality and integrity</li>
+            </ul>
+            <pre><span class="cm">// Key derivation with HKDF</span>
+<span class="kw">byte</span>[] sharedSecret = deriveSharedSecret(myPrivateKey, theirPublicKey);
+SecretKeySpec key = hkdfExpand(sharedSecret, <span class="str">"chat-v1"</span>.getBytes());
+
+<span class="cm">// Encryption — new random IV per message</span>
+<span class="kw">byte</span>[] iv  = SecureRandom.getInstanceStrong().generateSeed(12);
+Cipher cipher = Cipher.getInstance(<span class="str">"AES/GCM/NoPadding"</span>);
+cipher.init(Cipher.ENCRYPT_MODE, key, <span class="kw">new</span> GCMParameterSpec(128, iv));
+<span class="kw">byte</span>[] ciphertext = cipher.doFinal(plaintext.getBytes(UTF_8));</pre>
+            <p data-i18n="post5_p1">The server only ever sees ciphertext and public keys. It routes messages but cannot read them. The private keys never leave the client — which in this architecture is the Spring backend acting on behalf of each user session.</p>
+            <div class="callout" data-i18n="post5_callout">One common mistake: reusing the IV. With GCM, a repeated (key, IV) pair completely breaks confidentiality. Always generate a fresh IV per message.</div>
+          </div>
+        </article>
+
+        <!-- POST 6 -->
+        <article class="post-card" data-tags="sql arch" data-open="false">
+          <div class="post-card-header">
+            <div class="post-card-left">
+              <div class="post-title" data-i18n="post6_title">Window functions in Oracle: replacing cursor loops with elegant SQL</div>
+              <div class="post-meta">
+                <span class="post-date">Oct 2024</span>
+                <span class="post-tag">SQL</span>
+                <span class="post-read" data-i18n="read_5">5 min read</span>
+              </div>
+            </div>
+            <span class="post-toggle">▶</span>
+          </div>
+          <div class="post-excerpt" data-i18n="post6_excerpt">ROW_NUMBER, LAG, SUM OVER — once you see what window functions can do, you'll never write a cursor for ranking or running totals again.</div>
+          <div class="post-body">
+            <p data-i18n="post6_p1">In my day job I routinely work with Oracle schemas that track industrial production movements. A classic requirement: for each product, rank movements by date and compute a running cost total. The junior approach is a cursor with variables. The set-based approach uses window functions.</p>
+            <pre><span class="cm">-- Running cost total + rank per product, zero cursors</span>
+SELECT
+    product_code,
+    movement_date,
+    unit_cost,
+    ROW_NUMBER() OVER (
+        PARTITION BY product_code
+        ORDER BY     movement_date
+    ) AS movement_rank,
+    SUM(unit_cost) OVER (
+        PARTITION BY product_code
+        ORDER BY     movement_date
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS running_total
+FROM   movimento
+ORDER  BY product_code, movement_date;</pre>
+            <h4 data-i18n="post6_h1">LAG for delta calculations</h4>
+            <pre><span class="cm">-- Cost delta vs. previous movement</span>
+SELECT
+    product_code,
+    movement_date,
+    unit_cost,
+    unit_cost - LAG(unit_cost) OVER (
+        PARTITION BY product_code ORDER BY movement_date
+    ) AS cost_delta
+FROM movimento;</pre>
+            <div class="callout" data-i18n="post6_callout">Window functions execute after WHERE and GROUP BY but before ORDER BY. Think of them as a second pass over already-filtered rows — which makes them composable with CTEs for remarkably readable analytical queries.</div>
+          </div>
+        </article>
+
+      </div><!-- /posts-grid -->
+    </section>
+
+  </main>
+
+  <!-- STATUS BAR -->
+  <div class="statusbar">
+    <span class="sb-mode">NORMAL</span>
+    <span id="sb-section">home</span>
+    <span>·</span>
+    <span>Java · Spring Boot · DDD · Kafka</span>
+    <span class="sb-right">luisbarros.dev</span>
+  </div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const T = {
+  en: {
+    role:"Backend Engineer",
+    nav_home:"home",nav_exp:"experience",nav_skills:"skills",nav_projects:"projects",nav_contact:"contact",
+    bio_role:"Backend Software Engineer · Java &amp; Distributed Systems",
+    bio_desc:"Building production-grade distributed systems with Java 21 &amp; Spring Boot 3. Passionate about hexagonal architecture, domain-driven design, and event-driven patterns with Kafka and RabbitMQ. I bridge domain modelling and infrastructure — from DDD aggregate design to critical Oracle PL/SQL query optimization. Currently open to backend &amp; platform engineering roles at product companies.",
+    meta_loc:"location",meta_exp:"experience",meta_exp_val:"2+ years",meta_company:"company",
+    cta_contact:"✉ get in touch",
+    j1_title:"Development Analyst",j1_date:"May 2025 – Present",
+    j1_b1:"Led greenfield projects in Java/Spring Boot and Python/Django, translating business requirements into domain-oriented solutions with strong UX focus.",
+    j1_b2:"Performed critical PL/SQL performance optimizations on Oracle Database, eliminating N+1 query patterns in high-volume processing routines.",
+    j1_b3:"Mentored junior developers and interns on Clean Architecture and SOLID principles, accelerating team onboarding and raising code quality standards.",
+    j1_b4:"Integrated AI-assisted tooling into the development workflow, boosting productivity in automation and code generation tasks.",
+    j2_title:"Programming Assistant",j2_date:"Nov 2024 – May 2025",
+    j2_b1:"Refactored legacy PL/SQL procedures in Oracle Database — eliminated SQL injection vectors via bind variables and replaced magic numbers with named constants.",
+    j2_b2:"Evolved PHP 5 legacy systems applying SOLID principles, improving maintainability and extensibility of critical business logic modules.",
+    j2_b3:"Collaborated in technical discovery sessions with business stakeholders to adapt legacy systems to web-based environments.",
+    j2_b4:"Promoted to Development Analyst within 6 months — one of the fastest advancement trajectories in the team.",
+    j3_title:"IT Assistant",j3_date:"Jan 2024 – Nov 2024",
+    j3_b1:"Built internal APIs and business systems with Spring Boot 3 and Java 21, participating in architecture design and domain rule implementation.",
+    j3_b2:"Optimized Oracle Database procedures and queries via PL/SQL, creating high-performance data processing routines for industrial workloads.",
+    j3_b3:"Delivered full-stack features bridging ERP integration with web interfaces, gaining hands-on experience with Protheus TOTVS ecosystems.",
+    sk_lang:"languages &amp; backend",sk_arch:"architecture &amp; design",sk_msg:"messaging &amp; async",
+    sk_db:"databases &amp; storage",sk_sec:"security &amp; auth",sk_obs:"observability &amp; testing",
+    sk_infra:"infra &amp; devops",sk_int:"integrations",
+    p1_title:"Discord-Like — Real-Time Chat Platform",p1_sub:"Modular Monolith · DDD · E2EE · WebSocket · Kafka",
+    p1_b1:"Modular monolith with 3 fully decoupled bounded contexts (Identity, Collaboration, Presence) — inter-context communication exclusively via domain events published to Kafka, with zero class imports between contexts.",
+    p1_b2:"End-to-end encryption (E2EE) at the message level: ECDH for key exchange, HKDF-SHA256 for key derivation, AES-256-GCM with a random 12-byte IV per message.",
+    p1_b3:"WebSocket sessions with userId extracted exclusively from the authenticated JWT — never accepted as client input. Redis handles presence, token blacklisting, and caching.",
+    p1_b4:'145 tests running in CI/CD with GitHub Actions, requiring no additional infrastructure. Integration tests with Testcontainers tagged <code>@Tag("integration")</code> for isolated execution.',
+    p2_title:"Assine — Newsletter Subscription Platform",p2_sub:"Microservices · RabbitMQ · Stripe · Outbox Pattern",
+    p2_b1:"8-service microservices architecture (gateway, auth, billing, fiscal, notifications, content, subscriptions, access) — each service owns its own database, enforcing strict bounded context isolation.",
+    p2_b2:"Outbox Pattern in the billing service guarantees atomicity between persistence and event publication to RabbitMQ. JWT RS256 with local JWKS validation at the API gateway.",
+    p2_b3:"Full Stripe integration (credit card + Pix), automatic NFS-e emission via Nuvem Fiscal, newsletter delivery via Notion API + SendGrid, and passwordless auth (magic link + Google OAuth2).",
+    p2_b4:"Observability stack: Prometheus metrics, Grafana dashboards, and distributed tracing with Zipkin. Tests with JUnit 5, Testcontainers, and WireMock for third-party service mocking.",
+    c_phone:"☏ phone",c_loc_label:"◎ location",c_loc_val:"Sertãozinho, SP, Brazil",
+    edu1_title:"B.Sc. in Computer Engineering",cert1_sub:"Cloud Computing Fundamentals · Networking — Google",
+    cert2_title:"Fundamentos da Cultura DevOps",cert2_sub:"DevOps culture and practices certification",
+    lang_title:"Languages",lang_sub:"Portuguese (Native) · English (Advanced technical reading)",
+    cta_reach:"↓ reach out",
+    // posts
+    nav_posts:"posts",
+    pf_all:"all", pf_arch:"Architecture", pf_career:"Career",
+    read_4:"4 min read", read_5:"5 min read", read_6:"6 min read", read_7:"7 min read", read_8:"8 min read",
+    post1_title:"Why I chose Hexagonal Architecture for my portfolio projects",
+    post1_excerpt:"Ports &amp; Adapters isn't just a pattern — it's a discipline. Here's how adopting it changed the way I think about every layer of an application.",
+    post1_p1:"When I started the Discord-Like project I could have wired Spring controllers directly to JPA repositories and called it a day. Most tutorials do exactly that. But I'd seen enough legacy codebases at work — tightly coupled PHP and PL/SQL monstrosities — to know where that road ends.",
+    post1_p2:"Hexagonal Architecture (Ports &amp; Adapters) says: your domain model should have zero knowledge of Spring, JPA, Kafka, or HTTP. It talks only to interfaces — Ports — which the infrastructure implements as Adapters. Swap Kafka for RabbitMQ? Touch one adapter. Switch from PostgreSQL to MongoDB? One adapter. Your domain tests don't even need a running database.",
+    post1_h2:"What I gained in practice",
+    post1_li1:"145 tests run with zero Docker — domain logic tested with pure mocks",
+    post1_li2:"Kafka, Redis and PostgreSQL swappable without touching domain code",
+    post1_li3:"Onboarding new contributors is much faster — the domain reads like a business spec",
+    post1_li4:"Forced me to think in use cases first, not tables or endpoints",
+    post1_callout:"The biggest benefit isn't technical — it's cognitive. When the infrastructure is invisible, you think in domain terms and write better software.",
+    post2_title:"Hunting N+1 queries in Oracle PL/SQL stored procedures",
+    post2_excerpt:"A SELECT inside a cursor loop is a silent performance killer. Here's how I diagnosed and fixed recurring N+1 patterns in high-volume industrial PL/SQL routines.",
+    post2_p1:"At Nova Smar, I inherited stored procedures that had been accumulating business logic for years. One of them processed thousands of production records per run — and was inexplicably slow. Profiling revealed the culprit: a SELECT inside a cursor loop.",
+    post2_h1:"The classic trap", post2_h2:"The fix: push the join up",
+    post2_p2:"When avoiding the join isn't possible — e.g. conditional lookups — a bulk <code>COLLECT INTO</code> with a <code>FORALL</code> DML, or a pre-populated associative array, can eliminate the round-trips entirely.",
+    post2_callout:"Rule of thumb: if you reach for a SELECT inside a loop, pause and ask whether a single set-based query — or at worst a bulk collect — can replace it.",
+    post3_title:"The Outbox Pattern: how to not lose events when your DB commits",
+    post3_excerpt:"Publishing a domain event after a DB commit looks simple. It isn't. The Outbox Pattern is the canonical solution — and I implemented it in the Assine billing service.",
+    post3_p1:"Imagine you charge a subscription: the database commits the payment record, then you publish a <code>PaymentConfirmed</code> event to RabbitMQ. What happens if the app crashes between the two? The DB has the money, but the email service never fires. The customer never receives their receipt. That's a dual-write problem.",
+    post3_p2:"The solution: write the event to an <code>outbox</code> table in the same local DB transaction as the payment record. A separate relay process polls the outbox and publishes to the broker — marking rows as published only on success.",
+    post3_h2:"The relay",
+    post3_p3:"In Assine I implemented the relay as a scheduled Spring component. It reads unpublished rows, publishes each to RabbitMQ, and only then marks them published. If publishing fails, the row stays unpublished and will be retried on the next tick.",
+    post3_callout:"The trade-off: at-least-once delivery. Your consumers must be idempotent. But that's a much easier problem than losing events entirely.",
+    post4_title:"From Junior to Analyst in 6 months: what actually moved the needle",
+    post4_excerpt:"It wasn't about coding more hours. It was about making my work visible, understanding the business, and solving problems nobody asked me to solve.",
+    post4_p1:"When I joined Nova Smar as a Programming Assistant in November 2024, I set a private goal: make Analyst before the end of the first year. Six months later I was promoted. Here's what I think actually made the difference.",
+    post4_h1:"1. Understand why before how",
+    post4_p2:"Every bug I fixed, I asked: \u201Cwhy did this exist?\u201D Most legacy PHP issues weren\u2019t bugs \u2014 they were missing abstractions. Fixing the symptom and documenting the cause made me someone people brought problems to, not just tasks.",
+    post4_h2:"2. Make complexity visible",
+    post4_p3:"I started writing internal notes after every significant refactor — what was wrong, what changed, what risks remain. Managers rarely see the invisible work. Making it legible is a skill in itself.",
+    post4_h3:"3. Mentor before you're asked",
+    post4_p4:"When two interns joined, I volunteered to pair with them on their first tasks. Teaching forces you to articulate things you think you know. It also signals readiness for the next level in a way no single PR ever can.",
+    post4_callout:"Promotions rarely come from writing better code. They come from expanding the surface of your impact beyond your own keyboard.",
+    post5_title:"E2EE in Java: ECDH + HKDF + AES-256-GCM from scratch",
+    post5_excerpt:"End-to-end encryption sounds intimidating. The math is hard; the Java API is manageable. Here's the full key-exchange and encryption pipeline I built for the Discord-Like project.",
+    post5_h1:"The protocol in three steps",
+    post5_li1:"<strong>ECDH (P-256):</strong> each client generates a key pair, exchanges public keys, derives a shared secret — without ever transmitting the secret itself",
+    post5_li2:"<strong>HKDF-SHA256:</strong> stretches and contextualises the raw shared secret into a proper 256-bit encryption key",
+    post5_li3:"<strong>AES-256-GCM:</strong> encrypts each message with a random 12-byte IV — GCM mode gives both confidentiality and integrity",
+    post5_p1:"The server only ever sees ciphertext and public keys. It routes messages but cannot read them. The private keys never leave the client — which in this architecture is the Spring backend acting on behalf of each user session.",
+    post5_callout:"One common mistake: reusing the IV. With GCM, a repeated (key, IV) pair completely breaks confidentiality. Always generate a fresh IV per message.",
+    post6_title:"Window functions in Oracle: replacing cursor loops with elegant SQL",
+    post6_excerpt:"ROW_NUMBER, LAG, SUM OVER — once you see what window functions can do, you'll never write a cursor for ranking or running totals again.",
+    post6_p1:"In my day job I routinely work with Oracle schemas that track industrial production movements. A classic requirement: for each product, rank movements by date and compute a running cost total. The junior approach is a cursor with variables. The set-based approach uses window functions.",
+    post6_h1:"LAG for delta calculations",
+    post6_callout:"Window functions execute after WHERE and GROUP BY but before ORDER BY. Think of them as a second pass over already-filtered rows — which makes them composable with CTEs for remarkably readable analytical queries.",
+  },
+  pt: {
+    role:"Engenheiro Backend",
+    nav_home:"home",nav_exp:"experiência",nav_skills:"habilidades",nav_projects:"projetos",nav_contact:"contato",
+    bio_role:"Engenheiro de Software Backend · Java &amp; Sistemas Distribuídos",
+    bio_desc:"Construindo sistemas distribuídos prontos para produção com Java 21 &amp; Spring Boot 3. Apaixonado por arquitetura hexagonal, domain-driven design e padrões event-driven com Kafka e RabbitMQ. Faço a ponte entre modelagem de domínio e infraestrutura — do design de agregados DDD à otimização de queries críticas em Oracle PL/SQL. Aberto a oportunidades de engenharia backend em empresas de produto.",
+    meta_loc:"localização",meta_exp:"experiência",meta_exp_val:"2+ anos",meta_company:"empresa",
+    cta_contact:"✉ entrar em contato",
+    j1_title:"Analista de Desenvolvimento",j1_date:"Mai 2025 – Presente",
+    j1_b1:"Conduzi projetos do zero em Java/Spring Boot e Python/Django, traduzindo requisitos de negócio em soluções orientadas ao domínio com foco em UX.",
+    j1_b2:"Realizei otimizações críticas de performance em PL/SQL no Oracle Database, eliminando padrões equivalentes a N+1 queries em rotinas de alto volume.",
+    j1_b3:"Atuei na mentoria técnica de estagiários, disseminando boas práticas de Clean Architecture e SOLID e acelerando o onboarding da equipe.",
+    j1_b4:"Integrei recursos de IA ao fluxo de desenvolvimento, aumentando a produtividade em tarefas de automação e geração de código.",
+    j2_title:"Assistente de Programação",j2_date:"Nov 2024 – Mai 2025",
+    j2_b1:"Refatorei procedures PL/SQL legadas no Oracle Database — eliminei vetores de SQL injection via bind variables e substituí magic numbers por constantes nomeadas.",
+    j2_b2:"Evoluí sistemas legados em PHP 5 aplicando princípios SOLID, melhorando manutenibilidade e extensibilidade dos módulos de lógica de negócio.",
+    j2_b3:"Participei de levantamentos técnicos com áreas de negócio para adaptação de sistemas legados ao ambiente web.",
+    j2_b4:"Promovido a Analista de Desenvolvimento em 6 meses — uma das progressões mais rápidas da equipe.",
+    j3_title:"Auxiliar de TI",j3_date:"Jan 2024 – Nov 2024",
+    j3_b1:"Desenvolvi APIs e sistemas internos com Spring Boot 3 e Java 21, participando da definição de arquitetura e implementação de regras de negócio.",
+    j3_b2:"Otimizei procedures e queries no Oracle Database via PL/SQL, criando rotinas de alta performance para processamento de dados industriais.",
+    j3_b3:"Entreguei features full-stack integrando sistemas ERP a interfaces web, adquirindo experiência prática com ecossistemas Protheus TOTVS.",
+    sk_lang:"linguagens &amp; backend",sk_arch:"arquitetura &amp; design",sk_msg:"mensageria &amp; assíncrono",
+    sk_db:"bancos &amp; armazenamento",sk_sec:"segurança &amp; autenticação",sk_obs:"observabilidade &amp; testes",
+    sk_infra:"infra &amp; devops",sk_int:"integrações",
+    p1_title:"Discord-Like — Plataforma de Chat em Tempo Real",p1_sub:"Monólito Modular · DDD · E2EE · WebSocket · Kafka",
+    p1_b1:"Monólito modular com 3 bounded contexts totalmente desacoplados (Identity, Collaboration, Presence) — comunicação exclusivamente via eventos de domínio publicados no Kafka, sem importações de classes entre contextos.",
+    p1_b2:"Criptografia ponta a ponta (E2EE) no nível da mensagem: ECDH para troca de chaves, HKDF-SHA256 para derivação e AES-256-GCM com IV aleatório de 12 bytes por mensagem.",
+    p1_b3:"Sessões WebSocket com userId extraído exclusivamente do JWT autenticado — nunca aceito como input do cliente. Redis para presença, blacklist de tokens e cache.",
+    p1_b4:'145 testes rodando em CI/CD com GitHub Actions, sem infraestrutura adicional. Testes de integração com Testcontainers anotados com <code>@Tag("integration")</code> para execução isolada.',
+    p2_title:"Assine — Plataforma de Assinaturas de Newsletter",p2_sub:"Microserviços · RabbitMQ · Stripe · Outbox Pattern",
+    p2_b1:"Arquitetura de microserviços com 8 serviços independentes (gateway, auth, billing, fiscal, notifications, content, subscriptions, access) — cada um com banco de dados próprio, garantindo isolamento de bounded contexts.",
+    p2_b2:"Outbox Pattern no serviço de billing para garantir atomicidade entre persistência e publicação de eventos no RabbitMQ. JWT RS256 com validação local via JWKS no gateway.",
+    p2_b3:"Integração completa com Stripe (cartão + Pix), emissão automática de NFS-e via Nuvem Fiscal, newsletters via Notion API + SendGrid e autenticação passwordless (magic link + Google OAuth2).",
+    p2_b4:"Observabilidade com Prometheus, Grafana e Zipkin. Testes com JUnit 5, Testcontainers e WireMock para mock de serviços de terceiros.",
+    c_phone:"☏ telefone",c_loc_label:"◎ localização",c_loc_val:"Sertãozinho, SP, Brasil",
+    edu1_title:"Bacharelado em Engenharia de Computação",cert1_sub:"Cloud Computing Fundamentals · Networking — Google",
+    cert2_title:"Fundamentos da Cultura DevOps",cert2_sub:"Certificação em cultura e práticas DevOps",
+    lang_title:"Idiomas",lang_sub:"Português (Nativo) · Inglês (Leitura técnica avançada)",
+    cta_reach:"↓ entrar em contato",
+    // posts
+    nav_posts:"posts",
+    pf_all:"todos", pf_arch:"Arquitetura", pf_career:"Carreira",
+    read_4:"4 min de leitura", read_5:"5 min de leitura", read_6:"6 min de leitura", read_7:"7 min de leitura", read_8:"8 min de leitura",
+    post1_title:"Por que escolhi Arquitetura Hexagonal nos meus projetos de portfólio",
+    post1_excerpt:"Ports &amp; Adapters não é só um padrão — é uma disciplina. Veja como adotá-la mudou a forma como penso em cada camada de uma aplicação.",
+    post1_p1:"Quando comecei o projeto Discord-Like, eu poderia ter ligado os controllers do Spring direto aos repositories JPA e chamado de dia. A maioria dos tutoriais faz exatamente isso. Mas já tinha visto código legado suficiente no trabalho — PHP e PL/SQL fortemente acoplados — para saber onde esse caminho termina.",
+    post1_p2:"A Arquitetura Hexagonal (Ports &amp; Adapters) diz: o modelo de domínio não deve ter conhecimento algum de Spring, JPA, Kafka ou HTTP. Ele fala apenas com interfaces — Ports — que a infraestrutura implementa como Adapters. Trocar Kafka por RabbitMQ? Mexe num adapter. Mudar de PostgreSQL para MongoDB? Um adapter. Os testes de domínio nem precisam de banco rodando.",
+    post1_h2:"O que ganhei na prática",
+    post1_li1:"145 testes rodam sem Docker — lógica de domínio testada com mocks puros",
+    post1_li2:"Kafka, Redis e PostgreSQL intercambiáveis sem tocar no código de domínio",
+    post1_li3:"Onboarding de novos contribuidores muito mais rápido — o domínio lê como uma especificação de negócio",
+    post1_li4:"Me forçou a pensar em casos de uso primeiro, não em tabelas ou endpoints",
+    post1_callout:"O maior benefício não é técnico — é cognitivo. Quando a infraestrutura é invisível, você pensa em termos de domínio e escreve software melhor.",
+    post2_title:"Caçando N+1 em stored procedures PL/SQL no Oracle",
+    post2_excerpt:"Um SELECT dentro de um loop de cursor é um assassino silencioso de performance. Veja como diagnostiquei e corrigi padrões N+1 recorrentes em rotinas PL/SQL industriais de alto volume.",
+    post2_p1:"Na Nova Smar, herdei stored procedures que acumulavam lógica de negócio havia anos. Uma delas processava milhares de registros de produção por execução — e era inexplicavelmente lenta. O profiling revelou o culpado: um SELECT dentro de um loop de cursor.",
+    post2_h1:"A armadilha clássica", post2_h2:"A correção: subir o join",
+    post2_p2:"Quando evitar o join não é possível — ex: lookups condicionais — um <code>BULK COLLECT INTO</code> com <code>FORALL</code> DML, ou um array associativo pré-populado, pode eliminar os round-trips por completo.",
+    post2_callout:"Regra de ouro: se você for usar um SELECT dentro de um loop, pause e pergunte se uma query set-based — ou no pior caso um bulk collect — pode substituí-lo.",
+    post3_title:"Outbox Pattern: como não perder eventos quando o banco commita",
+    post3_excerpt:"Publicar um evento de domínio após um commit no banco parece simples. Não é. O Outbox Pattern é a solução canônica — e eu o implementei no serviço de billing do Assine.",
+    post3_p1:"Imagine que você cobra uma assinatura: o banco commita o registro de pagamento, depois você publica um evento <code>PaymentConfirmed</code> no RabbitMQ. O que acontece se a app travar entre os dois? O banco tem o dinheiro, mas o serviço de e-mail nunca dispara. O cliente nunca recebe o comprovante. Isso é o problema de dual-write.",
+    post3_p2:"A solução: escrever o evento em uma tabela <code>outbox</code> na mesma transação local do banco que o registro de pagamento. Um processo relay separado faz polling do outbox e publica no broker — marcando as linhas como publicadas somente em caso de sucesso.",
+    post3_h2:"O relay",
+    post3_p3:"No Assine, implementei o relay como um componente Spring com agendamento. Ele lê as linhas não publicadas, publica cada uma no RabbitMQ e só então as marca como publicadas. Se a publicação falhar, a linha permanece não publicada e será reprocessada no próximo tick.",
+    post3_callout:"O trade-off: entrega at-least-once. Seus consumidores precisam ser idempotentes. Mas isso é um problema muito mais fácil do que perder eventos.",
+    post4_title:"De Júnior a Analista em 6 meses: o que realmente fez diferença",
+    post4_excerpt:"Não foi sobre codar mais horas. Foi sobre tornar meu trabalho visível, entender o negócio e resolver problemas que ninguém me pediu para resolver.",
+    post4_p1:"Quando entrei na Nova Smar como Assistente de Programação em novembro de 2024, defini uma meta pessoal: chegar a Analista antes do fim do primeiro ano. Seis meses depois fui promovido. Aqui está o que acho que realmente fez a diferença.",
+    post4_h1:"1. Entender o porquê antes do como",
+    post4_p2:"Em cada bug que corrigi, perguntei: \u201Cpor que isso existia?\u201D A maioria dos problemas no PHP legado n\u00e3o eram bugs \u2014 eram abstra\u00e7\u00f5es ausentes. Corrigir o sintoma e documentar a causa me tornou algu\u00e9m a quem traziam problemas, n\u00e3o s\u00f3 tarefas.",
+    post4_h2:"2. Tornar a complexidade visível",
+    post4_p3:"Comecei a escrever notas internas depois de cada refactor significativo — o que estava errado, o que mudou, quais riscos restam. Gestores raramente enxergam o trabalho invisível. Torná-lo legível é uma habilidade em si.",
+    post4_h3:"3. Mentorar antes de ser pedido",
+    post4_p4:"Quando dois estagiários entraram, me voluntariei para fazer pair com eles nas primeiras tarefas. Ensinar te força a articular coisas que você acha que sabe. E sinaliza prontidão para o próximo nível de uma forma que nenhum PR isolado consegue.",
+    post4_callout:"Promoções raramente vêm de escrever código melhor. Vêm de expandir a superfície do seu impacto além do seu próprio teclado.",
+    post5_title:"E2EE em Java: ECDH + HKDF + AES-256-GCM do zero",
+    post5_excerpt:"Criptografia ponta a ponta parece intimidadora. A matemática é difícil; a API Java é gerenciável. Aqui está o pipeline completo de troca de chaves e criptografia que construí para o projeto Discord-Like.",
+    post5_h1:"O protocolo em três etapas",
+    post5_li1:"<strong>ECDH (P-256):</strong> cada cliente gera um par de chaves, troca chaves públicas, deriva um segredo compartilhado — sem nunca transmitir o segredo em si",
+    post5_li2:"<strong>HKDF-SHA256:</strong> estica e contextualiza o segredo compartilhado bruto em uma chave de criptografia de 256 bits adequada",
+    post5_li3:"<strong>AES-256-GCM:</strong> cifra cada mensagem com um IV aleatório de 12 bytes — o modo GCM garante confidencialidade e integridade",
+    post5_p1:"O servidor só vê texto cifrado e chaves públicas. Ele roteia mensagens, mas não consegue lê-las. As chaves privadas nunca saem do cliente — que nessa arquitetura é o backend Spring agindo em nome de cada sessão de usuário.",
+    post5_callout:"Um erro comum: reutilizar o IV. Com GCM, um par (chave, IV) repetido quebra completamente a confidencialidade. Sempre gere um IV novo por mensagem.",
+    post6_title:"Window functions no Oracle: substituindo loops de cursor por SQL elegante",
+    post6_excerpt:"ROW_NUMBER, LAG, SUM OVER — uma vez que você vê o que window functions conseguem fazer, nunca mais escreve cursor para ranking ou totais acumulados.",
+    post6_p1:"No meu trabalho, lido rotineiramente com schemas Oracle que rastreiam movimentos de produção industrial. Um requisito clássico: para cada produto, ranquear movimentos por data e calcular um custo acumulado. A abordagem júnior é um cursor com variáveis. A abordagem set-based usa window functions.",
+    post6_h1:"LAG para cálculos de delta",
+    post6_callout:"Window functions executam depois do WHERE e GROUP BY, mas antes do ORDER BY. Pense nelas como uma segunda passagem sobre linhas já filtradas — o que as torna compostas com CTEs para queries analíticas notavelmente legíveis.",
+  }
+};
+
+let lang  = localStorage.getItem('pf_lang')  || 'en';
+let theme = localStorage.getItem('pf_theme') || 'dark';
+
+function applyLang(l) {
+  lang = l; localStorage.setItem('pf_lang', l);
+  const t = T[l];
+  document.documentElement.lang = l;
+  document.documentElement.dataset.lang = l;
+  document.querySelectorAll('[data-i18n]').forEach(el => { const k=el.dataset.i18n; if(t[k]!==undefined) el.innerHTML=t[k]; });
+  document.querySelectorAll('[data-i18n-nav]').forEach(el => { const k=el.dataset.i18nNav; if(t[k]!==undefined) el.textContent=t[k]; });
+  document.getElementById('btn-en').className = 'ctrl-btn'+(l==='en'?' on':'');
+  document.getElementById('btn-pt').className = 'ctrl-btn'+(l==='pt'?' on':'');
+  const active = document.querySelector('.nav-item.active');
+  if(active) document.getElementById('sb-section').textContent = t[active.dataset.i18nNav]||active.dataset.section;
+}
+
+function applyTheme(th) {
+  theme = th; localStorage.setItem('pf_theme', th);
+  document.documentElement.dataset.theme = th;
+  document.getElementById('btn-theme').textContent = th==='dark' ? '◐ THEME' : '◑ THEME';
+}
+
+function setLang(l) { applyLang(l); }
+function toggleTheme() { applyTheme(theme==='dark'?'light':'dark'); }
+
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    const target = item.dataset.section;
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    item.classList.add('active');
+    document.getElementById(target).classList.add('active');
+    document.getElementById('sb-section').textContent = T[lang][item.dataset.i18nNav]||target;
+    document.querySelector('.main').scrollTo(0,0);
+  });
+});
+
+applyTheme(theme);
+applyLang(lang);
+
+/* posts — filter + expand */
+document.getElementById('posts-filters').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  const filter = btn.dataset.filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.post-card').forEach(card => {
+    const tags = card.dataset.tags || '';
+    card.style.display = (filter === 'all' || tags.includes(filter)) ? '' : 'none';
+  });
+});
+
+document.getElementById('posts-grid').addEventListener('click', e => {
+  const card = e.target.closest('.post-card');
+  if (!card) return;
+  const isOpen = card.dataset.open === 'true';
+  card.dataset.open = isOpen ? 'false' : 'true';
+});
+</script>
+</body>
+</html>

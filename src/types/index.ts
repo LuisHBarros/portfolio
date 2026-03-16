@@ -1,6 +1,6 @@
-export type Theme = 'dark' | 'light'
-export type Language = 'en' | 'pt'
-export type Section = 'home' | 'experience' | 'skills' | 'projects' | 'contact' | 'posts'
+export type Theme = "dark" | "light"
+export type Language = "en" | "pt"
+export type Section = "home" | "experience" | "skills" | "projects" | "contact" | "posts"
 
 export interface Experience {
   id: number
@@ -130,6 +130,7 @@ export interface Translations {
   meta_exp_val: string
   meta_company: string
   cta_contact: string
+  cta_download_cv: string
   j1_title: string
   j1_date: string
   j1_b1: string

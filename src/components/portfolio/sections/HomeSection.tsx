@@ -10,7 +10,7 @@ interface HomeSectionProps {
 }
 
 export function HomeSection({ activeSection, contentAnimKey = 0 }: HomeSectionProps) {
-  const { translations } = useLanguage()
+  const { lang, translations } = useLanguage()
 
   return (
     <section className={activeSection === "home" ? "section active" : "section"} id="home">
@@ -109,6 +109,13 @@ export function HomeSection({ activeSection, contentAnimKey = 0 }: HomeSectionPr
             rel="noopener noreferrer"
           >
             {"-> linkedin"}
+          </a>
+          <a
+            href={lang === "pt" ? "/luis-barros-cv-pt.pdf" : "/luis-barros-cv-en.pdf"}
+            download
+            className="cta-btn cta-ghost"
+          >
+            {translations?.cta_download_cv}
           </a>
         </div>
 

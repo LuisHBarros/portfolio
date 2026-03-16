@@ -271,11 +271,14 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Environment Variables
 
-| Variable                   | Required | Description                  |
-| -------------------------- | -------- | ---------------------------- |
-| `DATABASE_URL`             | Yes      | PostgreSQL connection string |
-| `NEXT_PUBLIC_GITHUB_URL`   | No       | GitHub profile URL           |
-| `NEXT_PUBLIC_LINKEDIN_URL` | No       | LinkedIn profile URL         |
+| Variable                   | Required              | Description                                                             |
+| -------------------------- | --------------------- | ----------------------------------------------------------------------- |
+| `DATABASE_URL`             | Yes                   | PostgreSQL connection string                                            |
+| `DIRECT_URL`               | Yes (Supabase/pooler) | PostgreSQL direct connection string (required by Prisma for migrations) |
+| `NEXT_PUBLIC_GITHUB_URL`   | No                    | GitHub profile URL                                                      |
+| `NEXT_PUBLIC_LINKEDIN_URL` | No                    | LinkedIn profile URL                                                    |
+
+**Note:** When using Supabase, `DATABASE_URL` should point to the pooler (port 6543) and `DIRECT_URL` to the direct connection (port 5432), as required by Prisma.
 
 ---
 

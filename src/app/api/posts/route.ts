@@ -36,8 +36,6 @@ export async function GET(request: Request) {
   } catch (error) {
     console.error('Error fetching posts:', error)
     return NextResponse.json({ error: 'Failed to fetch posts' }, { status: 500 })
-  } finally {
-    await db.$disconnect()
   }
 }
 

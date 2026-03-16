@@ -3,19 +3,24 @@
 import { useState } from "react"
 import { useLanguage } from "@/hooks/index"
 import { Command } from "@/components/ui/Command"
-import { usePosts } from "@/hooks/index"
 import { Post } from "@/types"
 import { PostDialog } from "@/components/ui/PostDialog"
 import { AnimatedContent } from "@/components/ui/AnimatedContent"
 
 interface PostsSectionProps {
   activeSection: string
+  posts: Post[]
+  isLoading?: boolean
   contentAnimKey?: number
 }
 
-export function PostsSection({ activeSection, contentAnimKey = 0 }: PostsSectionProps) {
+export function PostsSection({
+  activeSection,
+  posts,
+  isLoading = false,
+  contentAnimKey = 0,
+}: PostsSectionProps) {
   const { lang, translations } = useLanguage()
-  const { data: posts, isLoading } = usePosts()
   const [filter, setFilter] = useState("all")
   const [selectedPost, setSelectedPost] = useState<Post | null>(null)
 

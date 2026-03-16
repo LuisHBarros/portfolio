@@ -106,6 +106,15 @@ export interface Education {
   subPt: string
 }
 
+export interface PortfolioData {
+  experiences: Experience[]
+  projects: Project[]
+  skills: SkillCategory[]
+  posts: Post[]
+  contact: ContactInfo[]
+  education: Education[]
+}
+
 export interface Translations {
   role: string
   nav_home: string

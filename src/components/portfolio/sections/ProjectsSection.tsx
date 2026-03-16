@@ -1,18 +1,24 @@
 "use client"
 
 import { useLanguage } from "@/hooks/index"
-import { useProjects } from "@/hooks/index"
 import { Command } from "@/components/ui/Command"
 import { AnimatedContent } from "@/components/ui/AnimatedContent"
+import { Project } from "@/types"
 
 interface ProjectsSectionProps {
   activeSection: string
+  projects: Project[]
+  isLoading?: boolean
   contentAnimKey?: number
 }
 
-export function ProjectsSection({ activeSection, contentAnimKey = 0 }: ProjectsSectionProps) {
+export function ProjectsSection({
+  activeSection,
+  projects,
+  isLoading = false,
+  contentAnimKey = 0,
+}: ProjectsSectionProps) {
   const { lang } = useLanguage()
-  const { data: projects, isLoading } = useProjects()
 
   if (isLoading) {
     return (

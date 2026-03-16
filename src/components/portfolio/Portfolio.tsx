@@ -11,9 +11,22 @@ import { ProjectsSection } from "@/components/portfolio/sections/ProjectsSection
 import { ContactSection } from "@/components/portfolio/sections/ContactSection"
 import { PostsSection } from "@/components/portfolio/sections/PostsSection"
 import { TerminalTypingTransition } from "@/components/portfolio/TerminalTypingTransition"
+import { Command } from "@/components/ui/Command"
+import { usePortfolioData } from "@/hooks/index"
 import { Section } from "@/types"
 
 export function Portfolio() {
+  const {
+    experiences,
+    skills,
+    projects,
+    posts,
+    contact,
+    education,
+    isLoading: isDataLoading,
+    error: dataError,
+  } = usePortfolioData()
+
   const [activeSection, setActiveSection] = useState<Section>("home")
   const [displaySection, setDisplaySection] = useState<Section>("home")
   const [transitionSection, setTransitionSection] = useState<Section>("home")
@@ -76,6 +89,70 @@ export function Portfolio() {
     startTransition(section)
   }
 
+  const renderCurrentSection = () => {
+    if (dataError) {
+      return (
+        <section className="section active" id={displaySection}>
+          <Command command="cat error.log" />
+          <div style={{ color: "var(--accent-dim)" }}>{dataError}</div>
+        </section>
+      )
+    }
+
+    switch (displaySection) {
+      case "home":
+        return <HomeSection activeSection={displaySection} contentAnimKey={contentAnimKey} />
+      case "experience":
+        return (
+          <ExperienceSection
+            activeSection={displaySection}
+            experiences={experiences}
+            isLoading={isDataLoading}
+            contentAnimKey={contentAnimKey}
+          />
+        )
+      case "skills":
+        return (
+          <SkillsSection
+            activeSection={displaySection}
+            skills={skills}
+            isLoading={isDataLoading}
+            contentAnimKey={contentAnimKey}
+          />
+        )
+      case "projects":
+        return (
+          <ProjectsSection
+            activeSection={displaySection}
+            projects={projects}
+            isLoading={isDataLoading}
+            contentAnimKey={contentAnimKey}
+          />
+        )
+      case "contact":
+        return (
+          <ContactSection
+            activeSection={displaySection}
+            contact={contact}
+            education={education}
+            isLoading={isDataLoading}
+            contentAnimKey={contentAnimKey}
+          />
+        )
+      case "posts":
+        return (
+          <PostsSection
+            activeSection={displaySection}
+            posts={posts}
+            isLoading={isDataLoading}
+            contentAnimKey={contentAnimKey}
+          />
+        )
+      default:
+        return <HomeSection activeSection={displaySection} contentAnimKey={contentAnimKey} />
+    }
+  }
+
   return (
     <div className="terminal">
       <Titlebar />
@@ -93,14 +170,7 @@ export function Portfolio() {
             }}
           />
         ) : (
-          <>
-            <HomeSection activeSection={displaySection} contentAnimKey={contentAnimKey} />
-            <ExperienceSection activeSection={displaySection} contentAnimKey={contentAnimKey} />
-            <SkillsSection activeSection={displaySection} contentAnimKey={contentAnimKey} />
-            <ProjectsSection activeSection={displaySection} contentAnimKey={contentAnimKey} />
-            <ContactSection activeSection={displaySection} contentAnimKey={contentAnimKey} />
-            <PostsSection activeSection={displaySection} contentAnimKey={contentAnimKey} />
-          </>
+          renderCurrentSection()
         )}
       </main>
       <Statusbar activeSection={activeSection} />

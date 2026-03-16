@@ -1,18 +1,24 @@
 "use client"
 
 import { useLanguage } from "@/hooks/index"
-import { useSkills } from "@/hooks/index"
 import { Command } from "@/components/ui/Command"
 import { AnimatedContent } from "@/components/ui/AnimatedContent"
+import { SkillCategory } from "@/types"
 
 interface SkillsSectionProps {
   activeSection: string
+  skills: SkillCategory[]
+  isLoading?: boolean
   contentAnimKey?: number
 }
 
-export function SkillsSection({ activeSection, contentAnimKey = 0 }: SkillsSectionProps) {
+export function SkillsSection({
+  activeSection,
+  skills,
+  isLoading = false,
+  contentAnimKey = 0,
+}: SkillsSectionProps) {
   const { lang } = useLanguage()
-  const { data: skills, isLoading } = useSkills()
 
   if (isLoading) {
     return (

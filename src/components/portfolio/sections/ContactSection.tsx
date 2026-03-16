@@ -1,21 +1,28 @@
 "use client"
 
 import { useLanguage } from "@/hooks/index"
-import { useContact, useEducation } from "@/hooks/index"
 import { Command } from "@/components/ui/Command"
 import { AnimatedContent } from "@/components/ui/AnimatedContent"
+import { ContactInfo, Education } from "@/types"
 
 interface ContactSectionProps {
   activeSection: string
+  contact: ContactInfo[]
+  education: Education[]
+  isLoading?: boolean
   contentAnimKey?: number
 }
 
-export function ContactSection({ activeSection, contentAnimKey = 0 }: ContactSectionProps) {
+export function ContactSection({
+  activeSection,
+  contact,
+  education,
+  isLoading = false,
+  contentAnimKey = 0,
+}: ContactSectionProps) {
   const { lang, translations } = useLanguage()
-  const { data: contact, isLoading: contactLoading } = useContact()
-  const { data: education, isLoading: eduLoading } = useEducation()
 
-  if (contactLoading || eduLoading) {
+  if (isLoading) {
     return (
       <section className="section" id="contact">
         <Command command="cat contact.json" />

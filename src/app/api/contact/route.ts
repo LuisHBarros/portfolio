@@ -11,7 +11,7 @@ export async function GET() {
   } catch (error) {
     console.error('Error fetching contact:', error)
     return NextResponse.json({ error: 'Failed to fetch contact' }, { status: 500 })
-  } finally {
-    await db.$disconnect()
   }
 }
+
+export const revalidate = 3600

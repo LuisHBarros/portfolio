@@ -1,26 +1,90 @@
 'use client'
 
-import { useExperiences, useProjects, useSkills, usePosts, useContact, useEducation } from '@/hooks'
-import { Experience, Project, SkillCategory, Post, ContactInfo, Education } from '@/types'
+import { useEffect, useState } from 'react'
+import { PortfolioData } from '@/types'
+
+const EMPTY_PORTFOLIO_DATA: PortfolioData = {
+  experiences: [],
+  projects: [],
+  skills: [],
+  posts: [],
+  contact: [],
+  education: [],
+}
+
+let portfolioCache: PortfolioData | null = null
+let inFlightRequest: Promise<PortfolioData> | null = null
+
+async function fetchPortfolioData(): Promise<PortfolioData> {
+  if (portfolioCache) {
+    return portfolioCache
+  }
+
+  if (inFlightRequest) {
+    return inFlightRequest
+  }
+
+  inFlightRequest = fetch('/api/portfolio')
+    .then(async (response) => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch portfolio data')
+      }
+      return response.json() as Promise<PortfolioData>
+    })
+    .then((data) => {
+      portfolioCache = data
+      return data
+    })
+    .finally(() => {
+      inFlightRequest = null
+    })
+
+  return inFlightRequest
+}
 
 export function usePortfolioData() {
-  const { data: experiences, isLoading: expLoading } = useExperiences()
-  const { data: projects, isLoading: projLoading } = useProjects()
-  const { data: skills, isLoading: skillsLoading } = useSkills()
-  const { data: posts, isLoading: postsLoading } = usePosts()
-  const { data: contact, isLoading: contactLoading } = useContact()
-  const { data: education, isLoading: eduLoading } = useEducation()
+  const [data, setData] = useState<PortfolioData>(portfolioCache ?? EMPTY_PORTFOLIO_DATA)
+  const [isLoading, setIsLoading] = useState(!portfolioCache)
+  const [error, setError] = useState<string | null>(null)
 
-  const isLoading =
-    expLoading || projLoading || skillsLoading || postsLoading || contactLoading || eduLoading
+  useEffect(() => {
+    let isMounted = true
+
+    if (portfolioCache) {
+      setData(portfolioCache)
+      setIsLoading(false)
+      return () => {
+        isMounted = false
+      }
+    }
+
+    fetchPortfolioData()
+      .then((result) => {
+        if (!isMounted) return
+        setData(result)
+      })
+      .catch((err) => {
+        if (!isMounted) return
+        setError(err instanceof Error ? err.message : 'An error occurred')
+      })
+      .finally(() => {
+        if (!isMounted) return
+        setIsLoading(false)
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   return {
-    experiences: experiences as Experience[],
-    projects: projects as Project[],
-    skills: skills as SkillCategory[],
-    posts: posts as Post[],
-    contact: contact as ContactInfo[],
-    education: education as Education[],
+    experiences: data.experiences,
+    projects: data.projects,
+    skills: data.skills,
+    posts: data.posts,
+    contact: data.contact,
+    education: data.education,
     isLoading,
+    error,
   }
 }

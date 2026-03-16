@@ -1,18 +1,24 @@
 "use client"
 
 import { useLanguage } from "@/hooks/index"
-import { useExperiences } from "@/hooks/index"
 import { Command } from "@/components/ui/Command"
 import { AnimatedContent } from "@/components/ui/AnimatedContent"
+import { Experience } from "@/types"
 
 interface ExperienceSectionProps {
   activeSection: string
+  experiences: Experience[]
+  isLoading?: boolean
   contentAnimKey?: number
 }
 
-export function ExperienceSection({ activeSection, contentAnimKey = 0 }: ExperienceSectionProps) {
+export function ExperienceSection({
+  activeSection,
+  experiences,
+  isLoading = false,
+  contentAnimKey = 0,
+}: ExperienceSectionProps) {
   const { lang } = useLanguage()
-  const { data: experiences, isLoading } = useExperiences()
 
   if (isLoading) {
     return (

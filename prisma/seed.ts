@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
@@ -18,33 +18,41 @@ async function main() {
   const exp1 = await prisma.experience.create({
     data: {
       order: 1,
-      titleEn: 'Development Analyst',
-      titlePt: 'Analista de Desenvolvimento',
-      dateEn: 'May 2025 – Present',
-      datePt: 'Mai 2025 – Presente',
-      company: 'Nova Smar S/A',
-      location: 'Sertãozinho, SP',
+      titleEn: "Development Analyst",
+      titlePt: "Analista de Desenvolvimento",
+      dateEn: "May 2025 – Present",
+      datePt: "Mai 2025 – Presente",
+      company: "Nova Smar S/A",
+      location: "Sertãozinho, SP",
       bullets: {
         create: [
           {
             order: 1,
-            textEn: 'Led greenfield projects in Java/Spring Boot and Python/Django, translating business requirements into domain-oriented solutions with strong UX focus.',
-            textPt: 'Conduzi projetos do zero em Java/Spring Boot e Python/Django, traduzindo requisitos de negócio em soluções orientadas ao domínio com foco em UX.',
+            textEn:
+              "Led greenfield projects in Java/Spring Boot and Python/Django, translating business requirements into domain-oriented solutions with strong UX focus.",
+            textPt:
+              "Conduzi projetos do zero em Java/Spring Boot e Python/Django, traduzindo requisitos de negócio em soluções orientadas ao domínio com foco em UX.",
           },
           {
             order: 2,
-            textEn: 'Performed critical PL/SQL performance optimizations on Oracle Database, eliminating N+1 query patterns in high-volume processing routines.',
-            textPt: 'Realizei otimizações críticas de performance em PL/SQL no Oracle Database, eliminando padrões equivalentes a N+1 queries em rotinas de alto volume.',
+            textEn:
+              "Performed critical PL/SQL performance optimizations on Oracle Database, eliminating N+1 query patterns in high-volume processing routines.",
+            textPt:
+              "Realizei otimizações críticas de performance em PL/SQL no Oracle Database, eliminando padrões equivalentes a N+1 queries em rotinas de alto volume.",
           },
           {
             order: 3,
-            textEn: 'Mentored junior developers and interns on Clean Architecture and SOLID principles, accelerating team onboarding and raising code quality standards.',
-            textPt: 'Atuei na mentoria técnica de estagiários, disseminando boas práticas de Clean Architecture e SOLID e acelerando o onboarding da equipe.',
+            textEn:
+              "Mentored junior developers and interns on Clean Architecture and SOLID principles, accelerating team onboarding and raising code quality standards.",
+            textPt:
+              "Atuei na mentoria técnica de estagiários, disseminando boas práticas de Clean Architecture e SOLID e acelerando o onboarding da equipe.",
           },
           {
             order: 4,
-            textEn: 'Integrated AI-assisted tooling into the development workflow, boosting productivity in automation and code generation tasks.',
-            textPt: 'Integrei recursos de IA ao fluxo de desenvolvimento, aumentando a produtividade em tarefas de automação e geração de código.',
+            textEn:
+              "Integrated AI-assisted tooling into the development workflow, boosting productivity in automation and code generation tasks.",
+            textPt:
+              "Integrei recursos de IA ao fluxo de desenvolvimento, aumentando a produtividade em tarefas de automação e geração de código.",
           },
         ],
       },
@@ -54,33 +62,41 @@ async function main() {
   const exp2 = await prisma.experience.create({
     data: {
       order: 2,
-      titleEn: 'Programming Assistant',
-      titlePt: 'Assistente de Programação',
-      dateEn: 'Nov 2024 – May 2025',
-      datePt: 'Nov 2024 – Mai 2025',
-      company: 'Nova Smar S/A',
-      location: 'Sertãozinho, SP',
+      titleEn: "Programming Assistant",
+      titlePt: "Assistente de Programação",
+      dateEn: "Nov 2024 – May 2025",
+      datePt: "Nov 2024 – Mai 2025",
+      company: "Nova Smar S/A",
+      location: "Sertãozinho, SP",
       bullets: {
         create: [
           {
             order: 1,
-            textEn: 'Refactored legacy PL/SQL procedures in Oracle Database — eliminated SQL injection vectors via bind variables and replaced magic numbers with named constants.',
-            textPt: 'Refatorei procedures PL/SQL legadas no Oracle Database — eliminei vetores de SQL injection via bind variables e substituí magic numbers por constantes nomeadas.',
+            textEn:
+              "Refactored legacy PL/SQL procedures in Oracle Database — eliminated SQL injection vectors via bind variables and replaced magic numbers with named constants.",
+            textPt:
+              "Refatorei procedures PL/SQL legadas no Oracle Database — eliminei vetores de SQL injection via bind variables e substituí magic numbers por constantes nomeadas.",
           },
           {
             order: 2,
-            textEn: 'Evolved PHP 5 legacy systems applying SOLID principles, improving maintainability and extensibility of critical business logic modules.',
-            textPt: 'Evoluí sistemas legados em PHP 5 aplicando princípios SOLID, melhorando manutenibilidade e extensibilidade dos módulos de lógica de negócio.',
+            textEn:
+              "Evolved PHP 5 legacy systems applying SOLID principles, improving maintainability and extensibility of critical business logic modules.",
+            textPt:
+              "Evoluí sistemas legados em PHP 5 aplicando princípios SOLID, melhorando manutenibilidade e extensibilidade dos módulos de lógica de negócio.",
           },
           {
             order: 3,
-            textEn: 'Collaborated in technical discovery sessions with business stakeholders to adapt legacy systems to web-based environments.',
-            textPt: 'Participei de levantamentos técnicos com áreas de negócio para adaptação de sistemas legados ao ambiente web.',
+            textEn:
+              "Collaborated in technical discovery sessions with business stakeholders to adapt legacy systems to web-based environments.",
+            textPt:
+              "Participei de levantamentos técnicos com áreas de negócio para adaptação de sistemas legados ao ambiente web.",
           },
           {
             order: 4,
-            textEn: 'Promoted to Development Analyst within 6 months — one of the fastest advancement trajectories in the team.',
-            textPt: 'Promovido a Analista de Desenvolvimento em 6 meses — uma das progressões mais rápidas da equipe.',
+            textEn:
+              "Promoted to Development Analyst within 6 months — one of the fastest advancement trajectories in the team.",
+            textPt:
+              "Promovido a Analista de Desenvolvimento em 6 meses — uma das progressões mais rápidas da equipe.",
           },
         ],
       },
@@ -90,28 +106,34 @@ async function main() {
   const exp3 = await prisma.experience.create({
     data: {
       order: 3,
-      titleEn: 'IT Assistant',
-      titlePt: 'Auxiliar de TI',
-      dateEn: 'Jan 2024 – Nov 2024',
-      datePt: 'Jan 2024 – Nov 2024',
-      company: 'Fundição Moreno',
-      location: 'Sertãozinho, SP',
+      titleEn: "IT Assistant",
+      titlePt: "Auxiliar de TI",
+      dateEn: "Jan 2024 – Nov 2024",
+      datePt: "Jan 2024 – Nov 2024",
+      company: "Fundição Moreno",
+      location: "Sertãozinho, SP",
       bullets: {
         create: [
           {
             order: 1,
-            textEn: 'Built internal APIs and business systems with Spring Boot 3 and Java 21, participating in architecture design and domain rule implementation.',
-            textPt: 'Desenvolvi APIs e sistemas internos com Spring Boot 3 e Java 21, participando da definição de arquitetura e implementação de regras de negócio.',
+            textEn:
+              "Built internal APIs and business systems with Spring Boot 3 and Java 21, participating in architecture design and domain rule implementation.",
+            textPt:
+              "Desenvolvi APIs e sistemas internos com Spring Boot 3 e Java 21, participando da definição de arquitetura e implementação de regras de negócio.",
           },
           {
             order: 2,
-            textEn: 'Optimized Oracle Database procedures and queries via PL/SQL, creating high-performance data processing routines for industrial workloads.',
-            textPt: 'Otimizei procedures e queries no Oracle Database via PL/SQL, criando rotinas de alta performance para processamento de dados industriais.',
+            textEn:
+              "Optimized Oracle Database procedures and queries via PL/SQL, creating high-performance data processing routines for industrial workloads.",
+            textPt:
+              "Otimizei procedures e queries no Oracle Database via PL/SQL, criando rotinas de alta performance para processamento de dados industriais.",
           },
           {
             order: 3,
-            textEn: 'Delivered full-stack features bridging ERP integration with web interfaces, gaining hands-on experience with Protheus TOTVS ecosystems.',
-            textPt: 'Entreguei features full-stack integrando sistemas ERP a interfaces web, adquirindo experiência prática com ecossistemas Protheus TOTVS.',
+            textEn:
+              "Delivered full-stack features bridging ERP integration with web interfaces, gaining hands-on experience with Protheus TOTVS ecosystems.",
+            textPt:
+              "Entreguei features full-stack integrando sistemas ERP a interfaces web, adquirindo experiência prática com ecossistemas Protheus TOTVS.",
           },
         ],
       },
@@ -121,46 +143,54 @@ async function main() {
   await prisma.project.create({
     data: {
       order: 1,
-      titleEn: 'Discord-Like — Real-Time Chat Platform',
-      titlePt: 'Discord-Like — Plataforma de Chat em Tempo Real',
-      subEn: 'Modular Monolith · DDD · E2EE · WebSocket · Kafka',
-      subPt: 'Monólito Modular · DDD · E2EE · WebSocket · Kafka',
-      githubUrl: 'https://github.com/LuisHBarros',
+      titleEn: "Discord-Like — Real-Time Chat Platform",
+      titlePt: "Discord-Like — Plataforma de Chat em Tempo Real",
+      subEn: "Modular Monolith · DDD · E2EE · WebSocket · Kafka",
+      subPt: "Monólito Modular · DDD · E2EE · WebSocket · Kafka",
+      githubUrl: "https://github.com/LuisHBarros",
       bullets: {
         create: [
           {
             order: 1,
-            textEn: 'Modular monolith with 3 fully decoupled bounded contexts (Identity, Collaboration, Presence) — inter-context communication exclusively via domain events published to Kafka, with zero class imports between contexts.',
-            textPt: 'Monólito modular com 3 bounded contexts totalmente desacoplados (Identity, Collaboration, Presence) — comunicação exclusivamente via eventos de domínio publicados no Kafka, sem importações de classes entre contextos.',
+            textEn:
+              "Modular monolith with 3 fully decoupled bounded contexts (Identity, Collaboration, Presence) — inter-context communication exclusively via domain events published to Kafka, with zero class imports between contexts.",
+            textPt:
+              "Monólito modular com 3 bounded contexts totalmente desacoplados (Identity, Collaboration, Presence) — comunicação exclusivamente via eventos de domínio publicados no Kafka, sem importações de classes entre contextos.",
           },
           {
             order: 2,
-            textEn: 'End-to-end encryption (E2EE) at the message level: ECDH for key exchange, HKDF-SHA256 for key derivation, AES-256-GCM with a random 12-byte IV per message.',
-            textPt: 'Criptografia ponta a ponta (E2EE) no nível da mensagem: ECDH para troca de chaves, HKDF-SHA256 para derivação e AES-256-GCM com IV aleatório de 12 bytes por mensagem.',
+            textEn:
+              "End-to-end encryption (E2EE) at the message level: ECDH for key exchange, HKDF-SHA256 for key derivation, AES-256-GCM with a random 12-byte IV per message.",
+            textPt:
+              "Criptografia ponta a ponta (E2EE) no nível da mensagem: ECDH para troca de chaves, HKDF-SHA256 para derivação e AES-256-GCM com IV aleatório de 12 bytes por mensagem.",
           },
           {
             order: 3,
-            textEn: 'WebSocket sessions with userId extracted exclusively from the authenticated JWT — never accepted as client input. Redis handles presence, token blacklisting, and caching.',
-            textPt: 'Sessões WebSocket com userId extraído exclusivamente do JWT autenticado — nunca aceito como input do cliente. Redis para presença, blacklist de tokens e cache.',
+            textEn:
+              "WebSocket sessions with userId extracted exclusively from the authenticated JWT — never accepted as client input. Redis handles presence, token blacklisting, and caching.",
+            textPt:
+              "Sessões WebSocket com userId extraído exclusivamente do JWT autenticado — nunca aceito como input do cliente. Redis para presença, blacklist de tokens e cache.",
           },
           {
             order: 4,
-            textEn: '145 tests running in CI/CD with GitHub Actions, requiring no additional infrastructure. Integration tests with Testcontainers tagged @Tag("integration") for isolated execution.',
-            textPt: '145 testes rodando em CI/CD com GitHub Actions, sem infraestrutura adicional. Testes de integração com Testcontainers anotados com @Tag("integration") para execução isolada.',
+            textEn:
+              '145 tests running in CI/CD with GitHub Actions, requiring no additional infrastructure. Integration tests with Testcontainers tagged @Tag("integration") for isolated execution.',
+            textPt:
+              '145 testes rodando em CI/CD com GitHub Actions, sem infraestrutura adicional. Testes de integração com Testcontainers anotados com @Tag("integration") para execução isolada.',
           },
         ],
       },
       tags: {
         create: [
-          { label: 'Java 21' },
-          { label: 'Spring Boot 3' },
-          { label: 'Kafka' },
-          { label: 'WebSocket' },
-          { label: 'Redis' },
-          { label: 'PostgreSQL' },
-          { label: 'E2EE' },
-          { label: 'Testcontainers' },
-          { label: 'GitHub Actions' },
+          { label: "Java 21" },
+          { label: "Spring Boot 3" },
+          { label: "Kafka" },
+          { label: "WebSocket" },
+          { label: "Redis" },
+          { label: "PostgreSQL" },
+          { label: "E2EE" },
+          { label: "Testcontainers" },
+          { label: "GitHub Actions" },
         ],
       },
     },
@@ -169,46 +199,54 @@ async function main() {
   await prisma.project.create({
     data: {
       order: 2,
-      titleEn: 'Assine — Newsletter Subscription Platform',
-      titlePt: 'Assine — Plataforma de Assinaturas de Newsletter',
-      subEn: 'Microservices · RabbitMQ · Stripe · Outbox Pattern',
-      subPt: 'Microserviços · RabbitMQ · Stripe · Outbox Pattern',
-      githubUrl: 'https://github.com/LuisHBarros',
+      titleEn: "Assine — Newsletter Subscription Platform",
+      titlePt: "Assine — Plataforma de Assinaturas de Newsletter",
+      subEn: "Microservices · RabbitMQ · Stripe · Outbox Pattern",
+      subPt: "Microserviços · RabbitMQ · Stripe · Outbox Pattern",
+      githubUrl: "https://github.com/LuisHBarros",
       bullets: {
         create: [
           {
             order: 1,
-            textEn: '8-service microservices architecture (gateway, auth, billing, fiscal, notifications, content, subscriptions, access) — each service owns its own database, enforcing strict bounded context isolation.',
-            textPt: 'Arquitetura de microserviços com 8 serviços independentes (gateway, auth, billing, fiscal, notifications, content, subscriptions, access) — cada um com banco de dados próprio, garantindo isolamento de bounded contexts.',
+            textEn:
+              "8-service microservices architecture (gateway, auth, billing, fiscal, notifications, content, subscriptions, access) — each service owns its own database, enforcing strict bounded context isolation.",
+            textPt:
+              "Arquitetura de microserviços com 8 serviços independentes (gateway, auth, billing, fiscal, notifications, content, subscriptions, access) — cada um com banco de dados próprio, garantindo isolamento de bounded contexts.",
           },
           {
             order: 2,
-            textEn: 'Outbox Pattern in the billing service guarantees atomicity between persistence and event publication to RabbitMQ. JWT RS256 with local JWKS validation at the API gateway.',
-            textPt: 'Outbox Pattern no serviço de billing para garantir atomicidade entre persistência e publicação de eventos no RabbitMQ. JWT RS256 com validação local via JWKS no gateway.',
+            textEn:
+              "Outbox Pattern in the billing service guarantees atomicity between persistence and event publication to RabbitMQ. JWT RS256 with local JWKS validation at the API gateway.",
+            textPt:
+              "Outbox Pattern no serviço de billing para garantir atomicidade entre persistência e publicação de eventos no RabbitMQ. JWT RS256 com validação local via JWKS no gateway.",
           },
           {
             order: 3,
-            textEn: 'Full Stripe integration (credit card + Pix), automatic NFS-e emission via Nuvem Fiscal, newsletter delivery via Notion API + SendGrid, and passwordless auth (magic link + Google OAuth2).',
-            textPt: 'Integração completa com Stripe (cartão + Pix), emissão automática de NFS-e via Nuvem Fiscal, newsletters via Notion API + SendGrid e autenticação passwordless (magic link + Google OAuth2).',
+            textEn:
+              "Full Stripe integration (credit card + Pix), automatic NFS-e emission via Nuvem Fiscal, newsletter delivery via Notion API + SendGrid, and passwordless auth (magic link + Google OAuth2).",
+            textPt:
+              "Integração completa com Stripe (cartão + Pix), emissão automática de NFS-e via Nuvem Fiscal, newsletters via Notion API + SendGrid e autenticação passwordless (magic link + Google OAuth2).",
           },
           {
             order: 4,
-            textEn: 'Observability stack: Prometheus metrics, Grafana dashboards, and distributed tracing with Zipkin. Tests with JUnit 5, Testcontainers, and WireMock for third-party service mocking.',
-            textPt: 'Observabilidade com Prometheus, Grafana e Zipkin. Testes com JUnit 5, Testcontainers e WireMock para mock de serviços de terceiros.',
+            textEn:
+              "Observability stack: Prometheus metrics, Grafana dashboards, and distributed tracing with Zipkin. Tests with JUnit 5, Testcontainers, and WireMock for third-party service mocking.",
+            textPt:
+              "Observabilidade com Prometheus, Grafana e Zipkin. Testes com JUnit 5, Testcontainers e WireMock para mock de serviços de terceiros.",
           },
         ],
       },
       tags: {
         create: [
-          { label: 'Java 21' },
-          { label: 'Spring Boot 3' },
-          { label: 'RabbitMQ' },
-          { label: 'PostgreSQL' },
-          { label: 'Stripe' },
-          { label: 'Outbox Pattern' },
-          { label: 'Prometheus' },
-          { label: 'Grafana' },
-          { label: 'Docker' },
+          { label: "Java 21" },
+          { label: "Spring Boot 3" },
+          { label: "RabbitMQ" },
+          { label: "PostgreSQL" },
+          { label: "Stripe" },
+          { label: "Outbox Pattern" },
+          { label: "Prometheus" },
+          { label: "Grafana" },
+          { label: "Docker" },
         ],
       },
     },
@@ -217,19 +255,19 @@ async function main() {
   const cat1 = await prisma.skillCategory.create({
     data: {
       order: 1,
-      keyEn: 'languages & backend',
-      keyPt: 'linguagens & backend',
+      keyEn: "languages & backend",
+      keyPt: "linguagens & backend",
       skills: {
         create: [
-          { label: 'Java 21', isPrimary: true },
-          { label: 'Spring Boot 3', isPrimary: true },
-          { label: 'Spring Security' },
-          { label: 'Python' },
-          { label: 'FastAPI' },
-          { label: 'Django' },
-          { label: 'PHP' },
-          { label: 'REST APIs' },
-          { label: 'WebSocket' },
+          { label: "Java 21", isPrimary: true },
+          { label: "Spring Boot 3", isPrimary: true },
+          { label: "Spring Security" },
+          { label: "Python" },
+          { label: "FastAPI" },
+          { label: "Django" },
+          { label: "PHP" },
+          { label: "REST APIs" },
+          { label: "WebSocket" },
         ],
       },
     },
@@ -238,18 +276,18 @@ async function main() {
   const cat2 = await prisma.skillCategory.create({
     data: {
       order: 2,
-      keyEn: 'architecture & design',
-      keyPt: 'arquitetura & design',
+      keyEn: "architecture & design",
+      keyPt: "arquitetura & design",
       skills: {
         create: [
-          { label: 'Hexagonal Architecture', isPrimary: true },
-          { label: 'Domain-Driven Design', isPrimary: true },
-          { label: 'Microservices' },
-          { label: 'Modular Monolith' },
-          { label: 'Event-Driven Design' },
-          { label: 'Outbox Pattern' },
-          { label: 'SOLID' },
-          { label: 'Clean Architecture' },
+          { label: "Hexagonal Architecture", isPrimary: true },
+          { label: "Domain-Driven Design", isPrimary: true },
+          { label: "Microservices" },
+          { label: "Modular Monolith" },
+          { label: "Event-Driven Design" },
+          { label: "Outbox Pattern" },
+          { label: "SOLID" },
+          { label: "Clean Architecture" },
         ],
       },
     },
@@ -258,14 +296,14 @@ async function main() {
   await prisma.skillCategory.create({
     data: {
       order: 3,
-      keyEn: 'messaging & async',
-      keyPt: 'mensageria & assíncrono',
+      keyEn: "messaging & async",
+      keyPt: "mensageria & assíncrono",
       skills: {
         create: [
-          { label: 'Apache Kafka', isPrimary: true },
-          { label: 'RabbitMQ', isPrimary: true },
-          { label: 'Domain Events' },
-          { label: 'Event Sourcing' },
+          { label: "Apache Kafka", isPrimary: true },
+          { label: "RabbitMQ", isPrimary: true },
+          { label: "Domain Events" },
+          { label: "Event Sourcing" },
         ],
       },
     },
@@ -274,16 +312,16 @@ async function main() {
   await prisma.skillCategory.create({
     data: {
       order: 4,
-      keyEn: 'databases & storage',
-      keyPt: 'bancos & armazenamento',
+      keyEn: "databases & storage",
+      keyPt: "bancos & armazenamento",
       skills: {
         create: [
-          { label: 'PostgreSQL', isPrimary: true },
-          { label: 'Oracle Database', isPrimary: true },
-          { label: 'PL/SQL' },
-          { label: 'Redis' },
-          { label: 'JPA / Hibernate' },
-          { label: 'MinIO (S3)' },
+          { label: "PostgreSQL", isPrimary: true },
+          { label: "Oracle Database", isPrimary: true },
+          { label: "PL/SQL" },
+          { label: "Redis" },
+          { label: "JPA / Hibernate" },
+          { label: "MinIO (S3)" },
         ],
       },
     },
@@ -292,17 +330,17 @@ async function main() {
   await prisma.skillCategory.create({
     data: {
       order: 5,
-      keyEn: 'security & auth',
-      keyPt: 'segurança & autenticação',
+      keyEn: "security & auth",
+      keyPt: "segurança & autenticação",
       skills: {
         create: [
-          { label: 'JWT (RS256 / HS256)' },
-          { label: 'OAuth2 (Google)' },
-          { label: 'AES-256-GCM' },
-          { label: 'ECDH / HKDF-SHA256' },
-          { label: 'Argon2id' },
-          { label: 'Magic Link Auth' },
-          { label: 'E2EE' },
+          { label: "JWT (RS256 / HS256)" },
+          { label: "OAuth2 (Google)" },
+          { label: "AES-256-GCM" },
+          { label: "ECDH / HKDF-SHA256" },
+          { label: "Argon2id" },
+          { label: "Magic Link Auth" },
+          { label: "E2EE" },
         ],
       },
     },
@@ -311,19 +349,19 @@ async function main() {
   await prisma.skillCategory.create({
     data: {
       order: 6,
-      keyEn: 'observability & testing',
-      keyPt: 'observabilidade & testes',
+      keyEn: "observability & testing",
+      keyPt: "observabilidade & testes",
       skills: {
         create: [
-          { label: 'Prometheus' },
-          { label: 'Grafana' },
-          { label: 'Zipkin' },
-          { label: 'Micrometer' },
-          { label: 'JUnit 5' },
-          { label: 'Testcontainers' },
-          { label: 'Mockito' },
-          { label: 'WireMock' },
-          { label: 'AssertJ' },
+          { label: "Prometheus" },
+          { label: "Grafana" },
+          { label: "Zipkin" },
+          { label: "Micrometer" },
+          { label: "JUnit 5" },
+          { label: "Testcontainers" },
+          { label: "Mockito" },
+          { label: "WireMock" },
+          { label: "AssertJ" },
         ],
       },
     },
@@ -332,16 +370,16 @@ async function main() {
   await prisma.skillCategory.create({
     data: {
       order: 7,
-      keyEn: 'infra & devops',
-      keyPt: 'infra & devops',
+      keyEn: "infra & devops",
+      keyPt: "infra & devops",
       skills: {
         create: [
-          { label: 'Docker' },
-          { label: 'Docker Compose' },
-          { label: 'GitHub Actions' },
-          { label: 'CI/CD' },
-          { label: 'Git' },
-          { label: 'Linux' },
+          { label: "Docker" },
+          { label: "Docker Compose" },
+          { label: "GitHub Actions" },
+          { label: "CI/CD" },
+          { label: "Git" },
+          { label: "Linux" },
         ],
       },
     },
@@ -350,15 +388,15 @@ async function main() {
   await prisma.skillCategory.create({
     data: {
       order: 8,
-      keyEn: 'integrations',
-      keyPt: 'integrações',
+      keyEn: "integrations",
+      keyPt: "integrações",
       skills: {
         create: [
-          { label: 'Stripe (Card + Pix)' },
-          { label: 'SendGrid' },
-          { label: 'Notion API' },
-          { label: 'Google OAuth2' },
-          { label: 'Nuvem Fiscal (NFS-e)' },
+          { label: "Stripe (Card + Pix)" },
+          { label: "SendGrid" },
+          { label: "Notion API" },
+          { label: "Google OAuth2" },
+          { label: "Nuvem Fiscal (NFS-e)" },
         ],
       },
     },
@@ -367,10 +405,12 @@ async function main() {
   await prisma.post.create({
     data: {
       order: 1,
-      titleEn: 'Why I chose Hexagonal Architecture for my portfolio projects',
-      titlePt: 'Por que escolhi Arquitetura Hexagonal nos meus projetos de portfólio',
-      excerptEn: 'Ports & Adapters isn\'t just a pattern — it\'s a discipline. Here\'s how adopting it changed the way I think about every layer of an application.',
-      excerptPt: 'Ports & Adapters não é só um padrão — é uma disciplina. Veja como adotá-la mudou a forma como penso em cada camada de uma aplicação.',
+      titleEn: "Why I chose Hexagonal Architecture for my portfolio projects",
+      titlePt: "Por que escolhi Arquitetura Hexagonal nos meus projetos de portfólio",
+      excerptEn:
+        "Ports & Adapters isn't just a pattern — it's a discipline. Here's how adopting it changed the way I think about every layer of an application.",
+      excerptPt:
+        "Ports & Adapters não é só um padrão — é uma disciplina. Veja como adotá-la mudou a forma como penso em cada camada de uma aplicação.",
       contentEn: `
 When I started the Discord-Like project I could have wired Spring controllers directly to JPA repositories and called it a day. Most tutorials do exactly that. But I'd seen enough legacy codebases at work — tightly coupled PHP and PL/SQL monstrosities — to know where that road ends.
 
@@ -433,15 +473,12 @@ public class JpaMessageRepository implements MessageRepository {
 
 > O maior benefício não é técnico — é cognitivo. Quando a infraestrutura é invisível, você pensa em termos de domínio e escreve software melhor.
       `,
-      tags: 'java arch',
-      date: 'Mar 2025',
-      readTimeEn: '6 min read',
-      readTimePt: '6 min de leitura',
+      tags: "java arch",
+      date: "Mar 2025",
+      readTimeEn: "6 min read",
+      readTimePt: "6 min de leitura",
       postTags: {
-        create: [
-          { label: 'Architecture' },
-          { label: 'Java' },
-        ],
+        create: [{ label: "Architecture" }, { label: "Java" }],
       },
     },
   })
@@ -449,10 +486,12 @@ public class JpaMessageRepository implements MessageRepository {
   await prisma.post.create({
     data: {
       order: 2,
-      titleEn: 'Hunting N+1 queries in Oracle PL/SQL stored procedures',
-      titlePt: 'Caçando N+1 em stored procedures PL/SQL no Oracle',
-      excerptEn: 'A SELECT inside a cursor loop is a silent performance killer. Here\'s how I diagnosed and fixed recurring N+1 patterns in high-volume industrial PL/SQL routines.',
-      excerptPt: 'Um SELECT dentro de um loop de cursor é um assassino silencioso de performance. Veja como diagnostiquei e corrigi padrões N+1 recorrentes em rotinas PL/SQL industriais de alto volume.',
+      titleEn: "Hunting N+1 queries in Oracle PL/SQL stored procedures",
+      titlePt: "Caçando N+1 em stored procedures PL/SQL no Oracle",
+      excerptEn:
+        "A SELECT inside a cursor loop is a silent performance killer. Here's how I diagnosed and fixed recurring N+1 patterns in high-volume industrial PL/SQL routines.",
+      excerptPt:
+        "Um SELECT dentro de um loop de cursor é um assassino silencioso de performance. Veja como diagnostiquei e corrigi padrões N+1 recorrentes em rotinas PL/SQL industriais de alto volume.",
       contentEn: `
 At Nova Smar, I inherited stored procedures that had been accumulating business logic for years. One of them processed thousands of production records per run — and was inexplicably slow. Profiling revealed the culprit: a SELECT inside a cursor loop.
 
@@ -517,12 +556,12 @@ Quando evitar o join não é possível — ex: lookups condicionais — um \`BUL
 
 > Regra de ouro: se você for usar um SELECT dentro de um loop, pause e pergunte se uma query set-based — ou no pior caso um bulk collect — pode substituí-lo.
       `,
-      tags: 'sql',
-      date: 'Feb 2025',
-      readTimeEn: '5 min read',
-      readTimePt: '5 min de leitura',
+      tags: "sql",
+      date: "Feb 2025",
+      readTimeEn: "5 min read",
+      readTimePt: "5 min de leitura",
       postTags: {
-        create: [{ label: 'SQL' }],
+        create: [{ label: "SQL" }],
       },
     },
   })
@@ -530,10 +569,12 @@ Quando evitar o join não é possível — ex: lookups condicionais — um \`BUL
   await prisma.post.create({
     data: {
       order: 3,
-      titleEn: 'The Outbox Pattern: how to not lose events when your DB commits',
-      titlePt: 'Outbox Pattern: como não perder eventos quando o banco commita',
-      excerptEn: 'Publishing a domain event after a DB commit looks simple. It isn\'t. The Outbox Pattern is the canonical solution — and I implemented it in the Assine billing service.',
-      excerptPt: 'Publicar um evento de domínio após um commit no banco parece simples. Não é. O Outbox Pattern é a solução canônica — e eu o implementei no serviço de billing do Assine.',
+      titleEn: "The Outbox Pattern: how to not lose events when your DB commits",
+      titlePt: "Outbox Pattern: como não perder eventos quando o banco commita",
+      excerptEn:
+        "Publishing a domain event after a DB commit looks simple. It isn't. The Outbox Pattern is the canonical solution — and I implemented it in the Assine billing service.",
+      excerptPt:
+        "Publicar um evento de domínio após um commit no banco parece simples. Não é. O Outbox Pattern é a solução canônica — e eu o implementei no serviço de billing do Assine.",
       contentEn: `
 Imagine you charge a subscription: the database commits the payment record, then you publish a \`PaymentConfirmed\` event to RabbitMQ. What happens if the app crashes between the two? The DB has the money, but the email service never fires. The customer never receives their receipt. That's a dual-write problem.
 
@@ -578,15 +619,12 @@ No Assine, implementei o relay como um componente Spring com agendamento. Ele l�
 
 > O trade-off: entrega at-least-once. Seus consumidores precisam ser idempotentes. Mas isso é um problema muito mais fácil do que perder eventos.
       `,
-      tags: 'java arch',
-      date: 'Jan 2025',
-      readTimeEn: '7 min read',
-      readTimePt: '7 min de leitura',
+      tags: "java arch",
+      date: "Jan 2025",
+      readTimeEn: "7 min read",
+      readTimePt: "7 min de leitura",
       postTags: {
-        create: [
-          { label: 'Architecture' },
-          { label: 'Java' },
-        ],
+        create: [{ label: "Architecture" }, { label: "Java" }],
       },
     },
   })
@@ -594,10 +632,12 @@ No Assine, implementei o relay como um componente Spring com agendamento. Ele l�
   await prisma.post.create({
     data: {
       order: 4,
-      titleEn: 'From Junior to Analyst in 6 months: what actually moved the needle',
-      titlePt: 'De Júnior a Analista em 6 meses: o que realmente fez diferença',
-      excerptEn: 'It wasn\'t about coding more hours. It was about making my work visible, understanding the business, and solving problems nobody asked me to solve.',
-      excerptPt: 'Não foi sobre codar mais horas. Foi sobre tornar meu trabalho visível, entender o negócio e resolver problemas que ninguém me pediu para resolver.',
+      titleEn: "From Junior to Analyst in 6 months: what actually moved the needle",
+      titlePt: "De Júnior a Analista em 6 meses: o que realmente fez diferença",
+      excerptEn:
+        "It wasn't about coding more hours. It was about making my work visible, understanding the business, and solving problems nobody asked me to solve.",
+      excerptPt:
+        "Não foi sobre codar mais horas. Foi sobre tornar meu trabalho visível, entender o negócio e resolver problemas que ninguém me pediu para resolver.",
       contentEn: `
 When I joined Nova Smar as a Programming Assistant in November 2024, I set a private goal: make Analyst before the end of the first year. Six months later I was promoted. Here's what I think actually made the difference.
 
@@ -632,12 +672,12 @@ Quando dois estagiários entraram, me voluntariei para fazer pair com eles nas p
 
 > Promoções raramente vêm de escrever código melhor. Vêm de expandir a superfície do seu impacto além do seu próprio teclado.
       `,
-      tags: 'career',
-      date: 'Dec 2024',
-      readTimeEn: '4 min read',
-      readTimePt: '4 min de leitura',
+      tags: "career",
+      date: "Dec 2024",
+      readTimeEn: "4 min read",
+      readTimePt: "4 min de leitura",
       postTags: {
-        create: [{ label: 'Career' }],
+        create: [{ label: "Career" }],
       },
     },
   })
@@ -645,10 +685,12 @@ Quando dois estagiários entraram, me voluntariei para fazer pair com eles nas p
   await prisma.post.create({
     data: {
       order: 5,
-      titleEn: 'E2EE in Java: ECDH + HKDF + AES-256-GCM from scratch',
-      titlePt: 'E2EE em Java: ECDH + HKDF + AES-256-GCM do zero',
-      excerptEn: 'End-to-end encryption sounds intimidating. The math is hard; the Java API is manageable. Here\'s the full key-exchange and encryption pipeline I built for the Discord-Like project.',
-      excerptPt: 'Criptografia ponta a ponta parece intimidadora. A matemática é difícil; a API Java é gerenciável. Aqui está o pipeline completo de troca de chaves e criptografia que construí para o projeto Discord-Like.',
+      titleEn: "E2EE in Java: ECDH + HKDF + AES-256-GCM from scratch",
+      titlePt: "E2EE em Java: ECDH + HKDF + AES-256-GCM do zero",
+      excerptEn:
+        "End-to-end encryption sounds intimidating. The math is hard; the Java API is manageable. Here's the full key-exchange and encryption pipeline I built for the Discord-Like project.",
+      excerptPt:
+        "Criptografia ponta a ponta parece intimidadora. A matemática é difícil; a API Java é gerenciável. Aqui está o pipeline completo de troca de chaves e criptografia que construí para o projeto Discord-Like.",
       contentEn: `
 ## The protocol in three steps
 
@@ -695,12 +737,12 @@ O servidor só vê texto cifrado e chaves públicas. Ele roteia mensagens, mas n
 
 > Um erro comum: reutilizar o IV. Com GCM, um par (chave, IV) repetido quebra completamente a confidencialidade. Sempre gere um IV novo por mensagem.
       `,
-      tags: 'java',
-      date: 'Nov 2024',
-      readTimeEn: '8 min read',
-      readTimePt: '8 min de leitura',
+      tags: "java",
+      date: "Nov 2024",
+      readTimeEn: "8 min read",
+      readTimePt: "8 min de leitura",
       postTags: {
-        create: [{ label: 'Java' }],
+        create: [{ label: "Java" }],
       },
     },
   })
@@ -708,10 +750,12 @@ O servidor só vê texto cifrado e chaves públicas. Ele roteia mensagens, mas n
   await prisma.post.create({
     data: {
       order: 6,
-      titleEn: 'Window functions in Oracle: replacing cursor loops with elegant SQL',
-      titlePt: 'Window functions no Oracle: substituindo loops de cursor por SQL elegante',
-      excerptEn: 'ROW_NUMBER, LAG, SUM OVER — once you see what window functions can do, you\'ll never write a cursor for ranking or running totals again.',
-      excerptPt: 'ROW_NUMBER, LAG, SUM OVER — uma vez que você vê o que window functions conseguem fazer, nunca mais escreve cursor para ranking ou totais acumulados.',
+      titleEn: "Window functions in Oracle: replacing cursor loops with elegant SQL",
+      titlePt: "Window functions no Oracle: substituindo loops de cursor por SQL elegante",
+      excerptEn:
+        "ROW_NUMBER, LAG, SUM OVER — once you see what window functions can do, you'll never write a cursor for ranking or running totals again.",
+      excerptPt:
+        "ROW_NUMBER, LAG, SUM OVER — uma vez que você vê o que window functions conseguem fazer, nunca mais escreve cursor para ranking ou totais acumulados.",
       contentEn: `
 In my day job I routinely work with Oracle schemas that track industrial production movements. A classic requirement: for each product, rank movements by date and compute a running cost total. The junior approach is a cursor with variables. The set-based approach uses window functions.
 
@@ -788,12 +832,12 @@ FROM movimento;
 
 > Window functions executam depois do WHERE e GROUP BY, mas antes do ORDER BY. Pense nelas como uma segunda passagem sobre linhas já filtradas — o que as torna compostas com CTEs para queries analíticas notavelmente legíveis.
       `,
-      tags: 'sql arch',
-      date: 'Oct 2024',
-      readTimeEn: '5 min read',
-      readTimePt: '5 min de leitura',
+      tags: "sql arch",
+      date: "Oct 2024",
+      readTimeEn: "5 min read",
+      readTimePt: "5 min de leitura",
       postTags: {
-        create: [{ label: 'SQL' }],
+        create: [{ label: "SQL" }],
       },
     },
   })
@@ -801,50 +845,50 @@ FROM movimento;
   await prisma.contactInfo.createMany({
     data: [
       {
-        key: 'email',
-        labelEn: '✉ email',
-        labelPt: '✉ email',
-        value: '[email protected]',
-        href: 'mailto:[email protected]',
+        key: "email",
+        labelEn: "✉ email",
+        labelPt: "✉ email",
+        value: "me@luisbarros.dev",
+        href: "mailto:me@luisbarros.dev",
         order: 1,
       },
       {
-        key: 'phone',
-        labelEn: '☏ phone',
-        labelPt: '☏ telefone',
-        value: '+55 16 99399-1421',
-        href: 'tel:+5516993991421',
+        key: "phone",
+        labelEn: "☏ phone",
+        labelPt: "☏ telefone",
+        value: "+55 16 99399-1421",
+        href: "tel:+5516993991421",
         order: 2,
       },
       {
-        key: 'linkedin',
-        labelEn: '⇗ linkedin',
-        labelPt: '⇗ linkedin',
-        value: 'luis-henriquede-barros',
-        href: 'https://linkedin.com/in/luis-henriquede-barros-207929226',
+        key: "linkedin",
+        labelEn: "⇗ linkedin",
+        labelPt: "⇗ linkedin",
+        value: "luis-henriquede-barros",
+        href: "https://linkedin.com/in/luis-henriquede-barros-207929226",
         order: 3,
       },
       {
-        key: 'github',
-        labelEn: '◉ github',
-        labelPt: '◉ github',
-        value: 'LuisHBarros',
-        href: 'https://github.com/LuisHBarros',
+        key: "github",
+        labelEn: "◉ github",
+        labelPt: "◉ github",
+        value: "LuisHBarros",
+        href: "https://github.com/LuisHBarros",
         order: 4,
       },
       {
-        key: 'website',
-        labelEn: '◎ website',
-        labelPt: '◎ website',
-        value: 'luisbarros.dev',
-        href: 'https://luisbarros.dev',
+        key: "repository",
+        labelEn: "◎ repository",
+        labelPt: "◎ repositório",
+        value: "portfolio",
+        href: "https://github.com/LuisHBarros/portfolio",
         order: 5,
       },
       {
-        key: 'location',
-        labelEn: '◎ location',
-        labelPt: '◎ localização',
-        value: 'Sertãozinho, SP, Brazil',
+        key: "location",
+        labelEn: "◎ location",
+        labelPt: "◎ localização",
+        value: "Sertãozinho, SP, Brazil",
         href: null,
         order: 6,
       },
@@ -855,44 +899,44 @@ FROM movimento;
     data: [
       {
         order: 1,
-        badge: 'EDU',
-        titleEn: 'B.Sc. in Computer Engineering',
-        titlePt: 'Bacharelado em Engenharia de Computação',
-        subEn: 'Descomplica Faculdade Digital · 2022 – 2025',
-        subPt: 'Descomplica Faculdade Digital · 2022 – 2025',
+        badge: "EDU",
+        titleEn: "B.Sc. in Computer Engineering",
+        titlePt: "Bacharelado em Engenharia de Computação",
+        subEn: "Descomplica Faculdade Digital · 2022 – 2025",
+        subPt: "Descomplica Faculdade Digital · 2022 – 2025",
       },
       {
         order: 2,
-        badge: 'CERT',
-        titleEn: 'Google Cloud Computing Foundations',
-        titlePt: 'Google Cloud Computing Foundations',
-        subEn: 'Cloud Computing Fundamentals · Networking — Google',
-        subPt: 'Cloud Computing Fundamentals · Networking — Google',
+        badge: "CERT",
+        titleEn: "Google Cloud Computing Foundations",
+        titlePt: "Google Cloud Computing Foundations",
+        subEn: "Cloud Computing Fundamentals · Networking — Google",
+        subPt: "Cloud Computing Fundamentals · Networking — Google",
       },
       {
         order: 3,
-        badge: 'CERT',
-        titleEn: 'Fundamentos da Cultura DevOps',
-        titlePt: 'Fundamentos da Cultura DevOps',
-        subEn: 'DevOps culture and practices certification',
-        subPt: 'Certificação em cultura e práticas DevOps',
+        badge: "CERT",
+        titleEn: "Fundamentos da Cultura DevOps",
+        titlePt: "Fundamentos da Cultura DevOps",
+        subEn: "DevOps culture and practices certification",
+        subPt: "Certificação em cultura e práticas DevOps",
       },
       {
         order: 4,
-        badge: 'LANG',
-        titleEn: 'Languages',
-        titlePt: 'Idiomas',
-        subEn: 'Portuguese (Native) · English (Advanced technical reading)',
-        subPt: 'Português (Nativo) · Inglês (Leitura técnica avançada)',
+        badge: "LANG",
+        titleEn: "Languages",
+        titlePt: "Idiomas",
+        subEn: "Portuguese (Native) · English (Advanced technical reading)",
+        subPt: "Português (Nativo) · Inglês (Leitura técnica avançada)",
       },
     ],
   })
 
-  console.log('Database seeded successfully!')
+  console.log("Database seeded successfully!")
 }
 
 main()
-  .catch(e => {
+  .catch((e) => {
     console.error(e)
     process.exit(1)
   })

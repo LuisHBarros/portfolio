@@ -1,16 +1,19 @@
 "use client"
+
 import { useState } from "react"
 import { useLanguage } from "@/hooks/index"
 import { Command } from "@/components/ui/Command"
 import { usePosts } from "@/hooks/index"
 import { Post } from "@/types"
 import { PostDialog } from "@/components/ui/PostDialog"
+import { AnimatedContent } from "@/components/ui/AnimatedContent"
 
 interface PostsSectionProps {
   activeSection: string
+  contentAnimKey?: number
 }
 
-export function PostsSection({ activeSection }: PostsSectionProps) {
+export function PostsSection({ activeSection, contentAnimKey = 0 }: PostsSectionProps) {
   const { lang, translations } = useLanguage()
   const { data: posts, isLoading } = usePosts()
   const [filter, setFilter] = useState("all")
@@ -49,46 +52,48 @@ export function PostsSection({ activeSection }: PostsSectionProps) {
     <section id="posts" className={activeSection === "posts" ? "section active" : "section"}>
       <Command command="ls <span class='flag'>-lt</span> posts/ <span class='flag'>| grep</span> .md" />
 
-      <div className="posts-filters">
-        {filters.map((f) => (
-          <button
-            key={f.key}
-            className={`filter-btn ${filter === f.key ? "active" : ""}`}
-            onClick={() => setFilter(f.key)}
-          >
-            {f.label}
-          </button>
-        ))}
-      </div>
+      <AnimatedContent animateKey={contentAnimKey}>
+        <div className="posts-filters anim-line">
+          {filters.map((f) => (
+            <button
+              key={f.key}
+              className={`filter-btn ${filter === f.key ? "active" : ""}`}
+              onClick={() => setFilter(f.key)}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
 
-      <div className="posts-grid">
-        {filteredPosts.map((post) => (
-          <article
-            key={post.id}
-            className="post-card"
-            data-tags={post.tags}
-            onClick={() => setSelectedPost(post)}
-          >
-            <div className="post-card-header">
-              <div className="post-card-left">
-                <div className="post-title">{lang === "en" ? post.titleEn : post.titlePt}</div>
-                <div className="post-meta">
-                  <span className="post-date">{post.date}</span>
-                  {post.postTags.map((tag) => (
-                    <span key={tag.id} className="post-tag">
-                      {tag.label}
-                    </span>
-                  ))}
-                  <span className="post-read">{getReadTime(post)}</span>
+        <div className="posts-grid">
+          {filteredPosts.map((post) => (
+            <article
+              key={post.id}
+              className="post-card anim-line"
+              data-tags={post.tags}
+              onClick={() => setSelectedPost(post)}
+            >
+              <div className="post-card-header">
+                <div className="post-card-left">
+                  <div className="post-title">{lang === "en" ? post.titleEn : post.titlePt}</div>
+                  <div className="post-meta">
+                    <span className="post-date">{post.date}</span>
+                    {post.postTags.map((tag) => (
+                      <span key={tag.id} className="post-tag">
+                        {tag.label}
+                      </span>
+                    ))}
+                    <span className="post-read">{getReadTime(post)}</span>
+                  </div>
                 </div>
+                <span className="post-toggle">{">"}</span>
               </div>
-              <span className="post-toggle">▶</span>
-            </div>
 
-            <div className="post-excerpt">{lang === "en" ? post.excerptEn : post.excerptPt}</div>
-          </article>
-        ))}
-      </div>
+              <div className="post-excerpt">{lang === "en" ? post.excerptEn : post.excerptPt}</div>
+            </article>
+          ))}
+        </div>
+      </AnimatedContent>
 
       {selectedPost && (
         <PostDialog

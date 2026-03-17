@@ -72,7 +72,7 @@ export function HomeSection({ activeSection, contentAnimKey = 0 }: HomeSectionPr
             <span className="meta-key">linkedin</span>
             <span className="meta-val">
               <a
-                href="https://linkedin.com/in/luis-henriquede-barros-207929226"
+                href="https://linkedin.com/in/luis-henrique-de-barros-207929226"
                 target="_blank"
                 rel="noopener noreferrer"
               >

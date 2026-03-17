@@ -76,7 +76,7 @@ export function HomeSection({ activeSection, contentAnimKey = 0 }: HomeSectionPr
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                luis-henriquede-barros
+                luis-henrique-de-barros
               </a>
             </span>
           </div>
@@ -104,7 +104,7 @@ export function HomeSection({ activeSection, contentAnimKey = 0 }: HomeSectionPr
           </a>
           <a
             className="cta-btn cta-ghost"
-            href="https://linkedin.com/in/luis-henriquede-barros-207929226"
+            href="https://linkedin.com/in/luis-henrique-de-barros-207929226"
             target="_blank"
             rel="noopener noreferrer"
           >

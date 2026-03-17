@@ -864,8 +864,8 @@ FROM movimento;
         key: "linkedin",
         labelEn: "⇗ linkedin",
         labelPt: "⇗ linkedin",
-        value: "luis-henriquede-barros",
-        href: "https://linkedin.com/in/luis-henriquede-barros-207929226",
+        value: "luis-henrique-de-barros",
+        href: "https://linkedin.com/in/luis-henrique-de-barros",
         order: 3,
       },
       {

@@ -15,11 +15,13 @@ async function main() {
   await prisma.contactInfo.deleteMany()
   await prisma.education.deleteMany()
 
-  const exp1 = await prisma.experience.create({
+  // ── EXPERIÊNCIAS ────────────────────────────────────────────────────────────
+
+  await prisma.experience.create({
     data: {
       order: 1,
-      titleEn: "Development Analyst",
-      titlePt: "Analista de Desenvolvimento",
+      titleEn: "Software Development Analyst",
+      titlePt: "Analista de Desenvolvimento de Software",
       dateEn: "May 2025 – Present",
       datePt: "Mai 2025 – Presente",
       company: "Nova Smar S/A",
@@ -29,37 +31,37 @@ async function main() {
           {
             order: 1,
             textEn:
-              "Led greenfield projects in Java/Spring Boot and Python/Django, translating business requirements into domain-oriented solutions with strong UX focus.",
+              "Technically led full stack product development for external clients, making architecture and UX decisions, coordinating deliveries, and driving implementation end-to-end.",
             textPt:
-              "Conduzi projetos do zero em Java/Spring Boot e Python/Django, traduzindo requisitos de negócio em soluções orientadas ao domínio com foco em UX.",
+              "Liderei tecnicamente o desenvolvimento de novos produtos full stack para clientes externos, tomando decisões de arquitetura e UX, coordenando entregas e conduzindo a implementação de ponta a ponta.",
           },
           {
             order: 2,
             textEn:
-              "Performed critical PL/SQL performance optimizations on Oracle Database, eliminating N+1 query patterns in high-volume processing routines.",
+              "Eliminated critical PL/SQL performance bottlenecks in Oracle Database, fixing N+1 query patterns and improving data access efficiency in high-volume production routines.",
             textPt:
-              "Realizei otimizações críticas de performance em PL/SQL no Oracle Database, eliminando padrões equivalentes a N+1 queries em rotinas de alto volume.",
+              "Eliminei gargalos críticos de performance em PL/SQL no Oracle Database, corrigindo padrões de N+1 queries e reduzindo o tempo de execução de rotinas estratégicas em produção.",
           },
           {
             order: 3,
             textEn:
-              "Mentored junior developers and interns on Clean Architecture and SOLID principles, accelerating team onboarding and raising code quality standards.",
+              "Mentored 2–3 junior developers and interns, conducting technical onboarding and disseminating Clean Architecture and SOLID best practices.",
             textPt:
-              "Atuei na mentoria técnica de estagiários, disseminando boas práticas de Clean Architecture e SOLID e acelerando o onboarding da equipe.",
+              "Mentorei 2–3 desenvolvedores e estagiários, conduzindo onboarding técnico e disseminando boas práticas de Clean Architecture e SOLID.",
           },
           {
             order: 4,
             textEn:
-              "Integrated AI-assisted tooling into the development workflow, boosting productivity in automation and code generation tasks.",
+              "Integrated AI-assisted tooling (ChatGPT, Claude) into the development workflow and automated internal processes, increasing team productivity.",
             textPt:
-              "Integrei recursos de IA ao fluxo de desenvolvimento, aumentando a produtividade em tarefas de automação e geração de código.",
+              "Integrei ferramentas de IA ao fluxo de desenvolvimento e automatizei processos internos, aumentando a produtividade do time.",
           },
         ],
       },
     },
   })
 
-  const exp2 = await prisma.experience.create({
+  await prisma.experience.create({
     data: {
       order: 2,
       titleEn: "Programming Assistant",
@@ -80,16 +82,16 @@ async function main() {
           {
             order: 2,
             textEn:
-              "Evolved PHP 5 legacy systems applying SOLID principles, improving maintainability and extensibility of critical business logic modules.",
+              "Maintained and evolved PHP 5 legacy systems applying SOLID principles, improving maintainability and extensibility of critical business logic modules.",
             textPt:
-              "Evoluí sistemas legados em PHP 5 aplicando princípios SOLID, melhorando manutenibilidade e extensibilidade dos módulos de lógica de negócio.",
+              "Mantive e evoluí sistemas legados em PHP 5 aplicando princípios SOLID, melhorando manutenibilidade e extensibilidade dos módulos de lógica de negócio.",
           },
           {
             order: 3,
             textEn:
-              "Collaborated in technical discovery sessions with business stakeholders to adapt legacy systems to web-based environments.",
+              "Conducted technical discovery sessions with business stakeholders to adapt legacy systems to web-based environments.",
             textPt:
-              "Participei de levantamentos técnicos com áreas de negócio para adaptação de sistemas legados ao ambiente web.",
+              "Conduzi levantamentos técnicos com áreas de negócio para adaptação de sistemas legados ao ambiente web.",
           },
           {
             order: 4,
@@ -103,11 +105,11 @@ async function main() {
     },
   })
 
-  const exp3 = await prisma.experience.create({
+  await prisma.experience.create({
     data: {
       order: 3,
-      titleEn: "IT Assistant",
-      titlePt: "Auxiliar de TI",
+      titleEn: "Full Stack Developer",
+      titlePt: "Desenvolvedor Full Stack",
       dateEn: "Jan 2024 – Nov 2024",
       datePt: "Jan 2024 – Nov 2024",
       company: "Fundição Moreno",
@@ -117,9 +119,9 @@ async function main() {
           {
             order: 1,
             textEn:
-              "Built internal APIs and business systems with Spring Boot 3 and Java 21, participating in architecture design and domain rule implementation.",
+              "Built REST APIs and internal systems with Spring Boot 3 and Java 21, participating in architecture design and domain rule implementation.",
             textPt:
-              "Desenvolvi APIs e sistemas internos com Spring Boot 3 e Java 21, participando da definição de arquitetura e implementação de regras de negócio.",
+              "Desenvolvi APIs REST e sistemas internos com Spring Boot 3 e Java 21, participando da definição de arquitetura e implementação de regras de negócio.",
           },
           {
             order: 2,
@@ -140,9 +142,146 @@ async function main() {
     },
   })
 
+  await prisma.experience.create({
+    data: {
+      order: 4,
+      titleEn: "Data Automation & Analysis",
+      titlePt: "Automação e Análise de Dados",
+      dateEn: "Jun 2023 – Jan 2024",
+      datePt: "Jun 2023 – Jan 2024",
+      company: "Fundição Moreno",
+      location: "Sertãozinho, SP",
+      bullets: {
+        create: [
+          {
+            order: 1,
+            textEn:
+              "Developed Python scripts to automate repetitive fiscal and accounting processes, significantly reducing manual operational overhead for the team.",
+            textPt:
+              "Desenvolvi scripts em Python para automação de processos repetitivos no setor fiscal/contábil, reduzindo o tempo operacional da equipe.",
+          },
+          {
+            order: 2,
+            textEn:
+              "Built and maintained structured Excel spreadsheets for fiscal data control and integrated workflows with the Senior MEGA ERP system.",
+            textPt:
+              "Criei e atualizei planilhas estruturadas em Excel para controle de dados fiscais e integrei processos com o ERP Senior MEGA.",
+          },
+        ],
+      },
+    },
+  })
+
+  // ── PROJETOS ────────────────────────────────────────────────────────────────
+
   await prisma.project.create({
     data: {
       order: 1,
+      titleEn: "payment-service — Distributed Payment Platform",
+      titlePt: "payment-service — Plataforma de Pagamentos Distribuída",
+      subEn: "Microservices · Kafka · Outbox Pattern · OpenTelemetry · Stripe",
+      subPt: "Microserviços · Kafka · Outbox Pattern · OpenTelemetry · Stripe",
+      githubUrl: "https://github.com/LuisHBarros/payment-service",
+      bullets: {
+        create: [
+          {
+            order: 1,
+            textEn:
+              "Event-driven payment platform with multiple bounded contexts (auth, wallet, transfer, deposit, ledger) communicating exclusively via domain events published to Kafka.",
+            textPt:
+              "Plataforma de pagamentos orientada a eventos com múltiplos bounded contexts (auth, wallet, transfer, deposit, ledger) comunicando-se exclusivamente via eventos de domínio publicados no Kafka.",
+          },
+          {
+            order: 2,
+            textEn:
+              "Outbox Pattern guarantees atomicity between DB persistence and event publication. AES-256-GCM encryption for all sensitive data at rest.",
+            textPt:
+              "Outbox Pattern para garantia de atomicidade entre persistência e publicação de eventos. Criptografia AES-256-GCM em todos os dados sensíveis.",
+          },
+          {
+            order: 3,
+            textEn:
+              "Distributed tracing with OpenTelemetry/Jaeger, three auto-provisioned Grafana dashboards, deterministic pessimistic locking for concurrent transfers, and rate limiting with Bucket4j.",
+            textPt:
+              "Rastreamento distribuído com OpenTelemetry/Jaeger, três dashboards Grafana auto-provisionados, locking pessimista determinístico para transferências concorrentes e rate limiting com Bucket4j.",
+          },
+          {
+            order: 4,
+            textEn:
+              "Full Stripe deposit integration via Strategy Pattern, JWT with Redis-based JTI revocation, and Testcontainers-based CI integration tests.",
+            textPt:
+              "Integração completa com Stripe via Strategy Pattern, JWT com revogação de JTI no Redis e testes de integração com Testcontainers em CI.",
+          },
+        ],
+      },
+      tags: {
+        create: [
+          { label: "Java 21" },
+          { label: "Spring Boot 3" },
+          { label: "Kafka" },
+          { label: "PostgreSQL" },
+          { label: "Redis" },
+          { label: "Outbox Pattern" },
+          { label: "OpenTelemetry" },
+          { label: "Grafana" },
+          { label: "Stripe" },
+          { label: "Testcontainers" },
+          { label: "Docker" },
+        ],
+      },
+    },
+  })
+
+  await prisma.project.create({
+    data: {
+      order: 2,
+      titleEn: "url-shortener-aws — Serverless URL Shortener",
+      titlePt: "url-shortener-aws — Encurtador de URLs Serverless",
+      subEn: "AWS Lambda · DynamoDB · CloudFront · Terraform · SAA-C03 study",
+      subPt: "AWS Lambda · DynamoDB · CloudFront · Terraform · estudo SAA-C03",
+      githubUrl: "https://github.com/LuisHBarros/url-shortener-aws",
+      bullets: {
+        create: [
+          {
+            order: 1,
+            textEn:
+              "Serverless URL shortening service on AWS with infrastructure fully provisioned via Terraform — Lambda, DynamoDB, API Gateway, and CloudFront.",
+            textPt:
+              "Serviço serverless de encurtamento de URLs na AWS com infraestrutura totalmente provisionada via Terraform — Lambda, DynamoDB, API Gateway e CloudFront.",
+          },
+          {
+            order: 2,
+            textEn:
+              "Event-driven architecture on AWS designed for low operational cost and high scalability, built as a hands-on study vehicle for the AWS SAA-C03 certification.",
+            textPt:
+              "Arquitetura event-driven na AWS com foco em baixo custo operacional e alta escalabilidade. Desenvolvido como estudo prático para a certificação AWS SAA-C03.",
+          },
+          {
+            order: 3,
+            textEn:
+              "Interactive HTML architecture diagram hosted on GitHub Pages documenting all AWS components and data flows.",
+            textPt:
+              "Diagrama interativo de arquitetura em HTML hospedado no GitHub Pages documentando todos os componentes AWS e fluxos de dados.",
+          },
+        ],
+      },
+      tags: {
+        create: [
+          { label: "Java 21" },
+          { label: "AWS Lambda" },
+          { label: "DynamoDB" },
+          { label: "CloudFront" },
+          { label: "API Gateway" },
+          { label: "Terraform" },
+          { label: "Serverless" },
+        ],
+      },
+    },
+  })
+
+  await prisma.project.create({
+    data: {
+      order: 3,
       titleEn: "Discord-Like — Real-Time Chat Platform",
       titlePt: "Discord-Like — Plataforma de Chat em Tempo Real",
       subEn: "Modular Monolith · DDD · E2EE · WebSocket · Kafka",
@@ -198,7 +337,7 @@ async function main() {
 
   await prisma.project.create({
     data: {
-      order: 2,
+      order: 4,
       titleEn: "Assine — Newsletter Subscription Platform",
       titlePt: "Assine — Plataforma de Assinaturas de Newsletter",
       subEn: "Microservices · RabbitMQ · Stripe · Outbox Pattern",
@@ -252,7 +391,9 @@ async function main() {
     },
   })
 
-  const cat1 = await prisma.skillCategory.create({
+  // ── SKILLS ──────────────────────────────────────────────────────────────────
+
+  await prisma.skillCategory.create({
     data: {
       order: 1,
       keyEn: "languages & backend",
@@ -273,7 +414,7 @@ async function main() {
     },
   })
 
-  const cat2 = await prisma.skillCategory.create({
+  await prisma.skillCategory.create({
     data: {
       order: 2,
       keyEn: "architecture & design",
@@ -320,6 +461,7 @@ async function main() {
           { label: "Oracle Database", isPrimary: true },
           { label: "PL/SQL" },
           { label: "Redis" },
+          { label: "DynamoDB" },
           { label: "JPA / Hibernate" },
           { label: "MinIO (S3)" },
         ],
@@ -330,6 +472,27 @@ async function main() {
   await prisma.skillCategory.create({
     data: {
       order: 5,
+      keyEn: "cloud & infra",
+      keyPt: "cloud & infra",
+      skills: {
+        create: [
+          { label: "AWS Lambda", isPrimary: true },
+          { label: "AWS (EC2, SQS, DynamoDB, CloudFront)", isPrimary: true },
+          { label: "Terraform" },
+          { label: "Docker" },
+          { label: "Docker Compose" },
+          { label: "Kubernetes" },
+          { label: "GitHub Actions" },
+          { label: "CI/CD" },
+          { label: "Linux" },
+        ],
+      },
+    },
+  })
+
+  await prisma.skillCategory.create({
+    data: {
+      order: 6,
       keyEn: "security & auth",
       keyPt: "segurança & autenticação",
       skills: {
@@ -348,11 +511,13 @@ async function main() {
 
   await prisma.skillCategory.create({
     data: {
-      order: 6,
+      order: 7,
       keyEn: "observability & testing",
       keyPt: "observabilidade & testes",
       skills: {
         create: [
+          { label: "OpenTelemetry", isPrimary: true },
+          { label: "Jaeger" },
           { label: "Prometheus" },
           { label: "Grafana" },
           { label: "Zipkin" },
@@ -362,24 +527,6 @@ async function main() {
           { label: "Mockito" },
           { label: "WireMock" },
           { label: "AssertJ" },
-        ],
-      },
-    },
-  })
-
-  await prisma.skillCategory.create({
-    data: {
-      order: 7,
-      keyEn: "infra & devops",
-      keyPt: "infra & devops",
-      skills: {
-        create: [
-          { label: "Docker" },
-          { label: "Docker Compose" },
-          { label: "GitHub Actions" },
-          { label: "CI/CD" },
-          { label: "Git" },
-          { label: "Linux" },
         ],
       },
     },
@@ -397,10 +544,13 @@ async function main() {
           { label: "Notion API" },
           { label: "Google OAuth2" },
           { label: "Nuvem Fiscal (NFS-e)" },
+          { label: "Bucket4j" },
         ],
       },
     },
   })
+
+  // ── POSTS ───────────────────────────────────────────────────────────────────
 
   await prisma.post.create({
     data: {
@@ -842,14 +992,16 @@ FROM movimento;
     },
   })
 
+  // ── CONTACT ─────────────────────────────────────────────────────────────────
+
   await prisma.contactInfo.createMany({
     data: [
       {
         key: "email",
         labelEn: "✉ email",
         labelPt: "✉ email",
-        value: "me@luisbarros.dev",
-        href: "mailto:me@luisbarros.dev",
+        value: "me@luisbarros.com",
+        href: "mailto:me@luisbarros.com",
         order: 1,
       },
       {
@@ -895,15 +1047,17 @@ FROM movimento;
     ],
   })
 
+  // ── EDUCATION ────────────────────────────────────────────────────────────────
+
   await prisma.education.createMany({
     data: [
       {
         order: 1,
         badge: "EDU",
         titleEn: "B.Sc. in Computer Engineering",
-        titlePt: "Bacharelado em Engenharia de Computação",
-        subEn: "Descomplica Faculdade Digital · 2022 – 2025",
-        subPt: "Descomplica Faculdade Digital · 2022 – 2025",
+        titlePt: "Bacharelado em Engenharia da Computação",
+        subEn: "Descomplica Faculdade Digital · 2022 – 2025 · GPA 9.3/10",
+        subPt: "Descomplica Faculdade Digital · 2022 – 2025 · Média 9,3/10",
       },
       {
         order: 2,
@@ -926,8 +1080,8 @@ FROM movimento;
         badge: "LANG",
         titleEn: "Languages",
         titlePt: "Idiomas",
-        subEn: "Portuguese (Native) · English (Advanced technical reading)",
-        subPt: "Português (Nativo) · Inglês (Leitura técnica avançada)",
+        subEn: "Portuguese (Native) · English (Advanced — technical reading, writing & conversation)",
+        subPt: "Português (Nativo) · Inglês (Avançado — leitura, escrita e conversação técnica)",
       },
     ],
   })
